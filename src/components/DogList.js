@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import { getDogs } from '../actions/getDogs'
+import {Link} from 'react-router-dom'
 
 class DogList extends Component{
     componentDidMount(){
@@ -12,7 +13,9 @@ class DogList extends Component{
         .map((dog, index) => {
             return (
                 <li key={index}>
+                    <Link to={ `/dog/${ dog.id }` }>
                     {dog}
+                    </Link>
                 </li>
             )
         })
