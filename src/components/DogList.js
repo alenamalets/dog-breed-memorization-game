@@ -1,7 +1,12 @@
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
+import { getDogs } from '../actions/getDogs'
 
 class DogList extends Component{
+    componentDidMount(){
+        this.props.getDogs();
+    }
+
     render(){    
         const dogList = this.props.dogs
         .map((dog, index) => {
@@ -29,4 +34,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(DogList)
+export default connect(mapStateToProps, { getDogs })(DogList)
