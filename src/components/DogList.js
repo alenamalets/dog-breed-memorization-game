@@ -1,21 +1,37 @@
 import React,{Component} from 'react';
+import { connect } from 'react-redux';
+import { getDogs } from '../actions/getDogs'
 
-export default class Nav extends Component{
+class DogList extends Component{
+    componentDidMount(){
+        this.props.getDogs();
+    }
 
-    render(){      
-         
-        
+    render(){    
+        const dogList = this.props.dogs
+        .map((dog, index) => {
+            return (
+                <li key={index}>
+                    {dog}
+                </li>
+            )
+        })
 
         return (
             <div>
                 <h1>DogLists</h1> 
                 <ul>
-                    <li>dog 1</li>
-                    <li>dog 2</li>
-                    <li>dog 3</li>
+                    {dogList}
                 </ul>            
             </div>
         );
     }
-
 }
+
+const mapStateToProps = (state) => {
+    return {
+        dogs: Object.keys(state.dogsList)
+    }
+}
+
+export default connect(mapStateToProps, { getDogs })(DogList)
