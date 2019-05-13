@@ -11,6 +11,7 @@ class Game1 extends Component {
     return (
       <div>
         <h1>I'm a game 1</h1>
+        <img src={this.props.randomImage}></img>
       </div>
     )
   }
@@ -18,7 +19,6 @@ class Game1 extends Component {
 
 const mapStateToProps = (state) => {
   console.log("state", state.randomImage);
-  
   return {
       randomImage: state.randomImage
   }
