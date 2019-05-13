@@ -9,9 +9,11 @@ export function setDogList(dogs) {
   }
   
   export function getDogs() {
-    return function (dispatch) {
+    return function (dispatch) {  
       request('https://dog.ceo/api/breeds/list/all')
         .then(response => {
+          console.log(response.body.message);
+          
           dispatch(setDogList(response.body.message))
         })
     }
