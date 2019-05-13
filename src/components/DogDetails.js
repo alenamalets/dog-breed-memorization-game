@@ -8,7 +8,9 @@ export default class Nav extends Component{
 
         return (
             <div>
-               <h1>dog details</h1>          
+               <h1>dog details</h1> 
+               <ul>
+                   </ul>         
             </div>
         );
     }
