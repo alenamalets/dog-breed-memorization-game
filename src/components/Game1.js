@@ -63,37 +63,39 @@ class Game1 extends Component {
   handleChange=(event)=> {   
     const imageUrl = this.props.randomImage;
     const correctAnswer = this.substractName (imageUrl)    
-
-    const maxQuestionCount=5;
-    
-    let correctCounter=0;
-
-     
-
-    if(maxQuestionCount!==this.state.questionCounter){
-
-      this.setState({questionCounter: this.state.questionCounter+1})
-
-          if(event.target.value===correctAnswer){           
-
-            this.setState({correctAnswer: this.state.correctAnswer+1})
-              this.props.getRandomImage()            
-                         
-              console.log("correct answer");
-
-          }else{
-
-              console.log("oops");
-              setTimeout(()=>{
-               this.props.getRandomImage();
-              
-              },2000);
-          }
-          
+    const maxQuestionCount=4;  
+    if(maxQuestionCount===this.state.questionCounter) {
+      if(event.target.value===correctAnswer){           
+        this.setState({correctAnswer: this.state.correctAnswer+1})
+        this.setState({questionCounter: this.state.questionCounter+1}) 
+        this.props.getRandomImage()                     
+        console.log("correct answer")
+      }else{
+        console.log("oops");
+        setTimeout(()=>{
+          this.props.getRandomImage();
+          this.setState({questionCounter: this.state.questionCounter+1}) 
+          alert(`Finish, your score ${this.state.correctAnswer * 20}%`)
+        },2000);
+      } 
+    }
+    if(maxQuestionCount > this.state.questionCounter){
+        if(event.target.value===correctAnswer){           
+          this.setState({correctAnswer: this.state.correctAnswer+1})
+          this.setState({questionCounter: this.state.questionCounter+1}) 
+          this.props.getRandomImage()                     
+          console.log("correct answer")
+        }else{
+          console.log("oops");
+          setTimeout(()=>{
+            this.props.getRandomImage();
+            this.setState({questionCounter: this.state.questionCounter+1}) 
+          },2000);
+        } 
      }
-
-     console.log("questionCounter",this.state.questionCounter)
-     console.log("correctAnswer",this.state.correctAnswer)
+   
+    //  console.log("questionCounter",this.state.questionCounter)
+    //  console.log("correctAnswer",this.state.correctAnswer)
   
   }
   
@@ -110,10 +112,9 @@ class Game1 extends Component {
       <div>
         <h1>I'm a game 1</h1>
         <img src={imageUrl} alt="random dog"></img>  
-        <div id="myProgress">
-          <div id="myBar" style={{ width: this.props.score / 100 }}></div>
+        <div id="myProgress" style={{width: 1000, marginLeft: 200}}>
+          <div id="myBar" style={{ width: this.state.correctAnswer *200}}></div>
         </div>
-        <button onclick="move()">Click Me</button> 
         <p>please choose correct answer:</p>
         {answers.map((answer,index )=> 
           <div className="radio" key={index} >
@@ -133,6 +134,6 @@ const mapStateToProps = (state) => {
       randomImage: state.randomImage,
       dogs: Object.keys(state.dogsList)
   }
-}
+} 
 
 export default connect(mapStateToProps, { getRandomImage, getDogs })(Game1)
