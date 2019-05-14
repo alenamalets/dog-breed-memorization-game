@@ -48,10 +48,45 @@ class Game1 extends Component {
     return array;
   };
 
+
+
+  handleChange=(event)=> {   
+
+    const imageUrl = this.props.randomImage;
+
+    const correctAnswer = this.substractName (imageUrl)
+
+    const questionlength=5;
+    const counterAnswer=0;
+
+
+    
+    if(event.target.value===correctAnswer){
+      console.log("correct answer");
+      
+      // if(questionlength!==0){
+      //   questionlength--
+      //   counterAnswer++
+      // }
+      
+    }else{
+      console.log("oops");
+      // if(questionlength!==0){
+      //   questionlength--
+       
+      // }
+    }
+    
+  
+  }
+  
+
+
   render() {
     const imageUrl = this.props.randomImage;
     const answers = ['','',''];
     answers[0] = this.substractName (imageUrl);
+
     this.answersNoRepeat(this.props.dogs, answers);
     this.shuffle(answers);
 
@@ -62,7 +97,9 @@ class Game1 extends Component {
         <p>please choose correct answer:</p>
         {answers.map((answer,index )=> 
           <div className="radio" key={index} >
-            <input type="radio" value={answer} />{answer}
+          <label key={answer} >
+            <input type="radio" value={answer} id={answer} name="answer" onChange={this.handleChange}   />{answer}
+          </label>  
          </div>)}
       </div>
        
