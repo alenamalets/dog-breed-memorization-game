@@ -12,7 +12,7 @@ export function setDogList(dogs) {
     return function (dispatch) {  
       request('https://dog.ceo/api/breeds/list/all')
         .then(response => {
-          console.log(response.body.message);
+         // console.log(response.body.message);
           
           dispatch(setDogList(response.body.message))
         })

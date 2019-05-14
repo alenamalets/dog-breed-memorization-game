@@ -3,7 +3,14 @@ import {getRandomImage} from '../actions/getRandomImage'
 import {getDogs} from '../actions/getDogs'
 import { connect } from 'react-redux';
 
+
 class Game1 extends Component {
+
+  state={
+    questionCounter:0,
+    correctAnswer:0
+  } 
+
   componentDidMount(){  
     this.props.getRandomImage();
     this.props.getDogs();
@@ -25,7 +32,7 @@ class Game1 extends Component {
           })
           const randomAnswer = dogsList[Math.floor(Math.random() * dogsList.length)];
           answers[i+1] = randomAnswer;
-          console.log(dogsList);
+          //console.log(dogsList);
       }
   }
 
@@ -50,33 +57,41 @@ class Game1 extends Component {
 
 
 
+
   handleChange=(event)=> {   
-
     const imageUrl = this.props.randomImage;
+    const correctAnswer = this.substractName (imageUrl)    
 
-    const correctAnswer = this.substractName (imageUrl)
-
-    const questionlength=5;
-    const counterAnswer=0;
-
-
+    const maxQuestionCount=5;
     
-    if(event.target.value===correctAnswer){
-      console.log("correct answer");
-      
-      // if(questionlength!==0){
-      //   questionlength--
-      //   counterAnswer++
-      // }
-      
-    }else{
-      console.log("oops");
-      // if(questionlength!==0){
-      //   questionlength--
-       
-      // }
-    }
-    
+    let correctCounter=0;
+
+     
+
+    if(maxQuestionCount!==this.state.questionCounter){
+
+      this.setState({questionCounter: this.state.questionCounter+1})
+
+          if(event.target.value===correctAnswer){           
+
+            this.setState({correctAnswer: this.state.correctAnswer+1})
+              this.props.getRandomImage()            
+                         
+              console.log("correct answer");
+
+          }else{
+
+              console.log("oops");
+              setTimeout(()=>{
+               this.props.getRandomImage();
+              
+              },2000);
+          }
+          
+     }
+
+     console.log("questionCounter",this.state.questionCounter)
+     console.log("correctAnswer",this.state.correctAnswer)
   
   }
   
@@ -108,7 +123,7 @@ class Game1 extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state", state);
+ // console.log("state", state);
   return {
       randomImage: state.randomImage,
       dogs: Object.keys(state.dogsList)
