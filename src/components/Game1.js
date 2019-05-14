@@ -76,7 +76,9 @@ class Game1 extends Component {
           this.props.getRandomImage();
           this.setState({questionCounter: this.state.questionCounter+1}) 
           alert(`Finish, your score ${this.state.correctAnswer * 20}%`)
+          window.location.reload();
         },2000);
+        
       } 
     }
     if(maxQuestionCount > this.state.questionCounter){
