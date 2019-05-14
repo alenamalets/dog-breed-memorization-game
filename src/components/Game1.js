@@ -27,12 +27,11 @@ const answers = ['option1', 'option2', 'option3'];
 
 class Game1 extends Component {
 
-
-componentDidMount(){
-   shuffle(answers);
-    this.props.getRandomImage(); 
-}
-  
+  componentDidMount(){  
+    shuffle(answers);
+    this.props.getRandomImage();
+  }
+ 
   substractName = (name) => {
     name = decodeURIComponent(name);
     name = name.substring(30);
