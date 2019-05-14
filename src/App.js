@@ -15,7 +15,7 @@ class App extends Component{
         <div className="App" >
            <Nav/>
            <Route exact path="/" component={DogList} />
-           <Route exact path="/dog/:id" component={DogDetails} />
+           <Route exact path="/dog/:name" component={DogDetails} />
            <Route exact path="/game1" component={Game1} />
            <Route exact path="/game2" component={Game2} />
            <Route exact path="/game3" component={Game3} />
