@@ -13,7 +13,7 @@ class DogList extends Component{
         .map((dog, index) => {
             return (
                 <li key={index}>
-                    <Link to={ `/dog/${ dog.id }` }>
+                    <Link to={ `/dog/${dog}` }>
                     {dog}
                     </Link>
                 </li>
