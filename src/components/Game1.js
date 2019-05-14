@@ -1,35 +1,12 @@
 import React, { Component } from 'react'
 import {getRandomImage} from '../actions/getRandomImage'
+import {getDogs} from '../actions/getDogs'
 import { connect } from 'react-redux';
 
-
-const shuffle = function (array) {
-
-	let currentIndex = array.length;
-	let temporaryValue, randomIndex;
-
-	// While there remain elements to shuffle...
-	while (0 !== currentIndex) {
-		// Pick a remaining element...
-		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
-
-		// And swap it with the current element.
-		temporaryValue = array[currentIndex];
-		array[currentIndex] = array[randomIndex];
-		array[randomIndex] = temporaryValue;
-	}
-
-	return array;
-
-};
-const answers = ['option1', 'option2', 'option3'];
-
 class Game1 extends Component {
-
   componentDidMount(){  
-    shuffle(answers);
     this.props.getRandomImage();
+    this.props.getDogs();
   }
  
   substractName = (name) => {
@@ -38,17 +15,50 @@ class Game1 extends Component {
     name = name.substring(0, name.lastIndexOf("/"));
     const newName = name.includes("-") ? name.substring(0, name.lastIndexOf("-")) : name
     return newName;
-    
   }  
 
+  answersNoRepeat = (dogsList, answers) => {
+      for(let i=0; i<2; i++){
+          const filterTarget = answers[i];
+          dogsList = dogsList.filter(dog => {
+              return dog !== filterTarget;
+          })
+          const randomAnswer = dogsList[Math.floor(Math.random() * dogsList.length)];
+          answers[i+1] = randomAnswer;
+          console.log(dogsList);
+      }
+  }
+
+  shuffle = (array) => {
+
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  };
 
   render() {
     const imageUrl = this.props.randomImage;
+    const answers = ['','',''];
+    answers[0] = this.substractName (imageUrl);
+    this.answersNoRepeat(this.props.dogs, answers);
+    this.shuffle(answers);
+
     return (
       <div>
         <h1>I'm a game 1</h1>
-        <img src={imageUrl} alt="random dog"></img>
-        <p>{this.substractName (imageUrl)}</p>    
+        <img src={imageUrl} alt="random dog"></img>  
         <p>please choose correct answer:</p>
         {answers.map((answer,index )=> 
           <div className="radio" key={index} >
@@ -63,8 +73,9 @@ class Game1 extends Component {
 const mapStateToProps = (state) => {
   console.log("state", state);
   return {
-      randomImage: state.randomImage
+      randomImage: state.randomImage,
+      dogs: Object.keys(state.dogsList)
   }
 }
 
-export default connect(mapStateToProps, { getRandomImage })(Game1)
+export default connect(mapStateToProps, { getRandomImage, getDogs })(Game1)
