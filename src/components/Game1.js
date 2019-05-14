@@ -27,32 +27,42 @@ const answers = ['option1', 'option2', 'option3'];
 
 class Game1 extends Component {
 
+
 componentDidMount(){
-   
    shuffle(answers);
-    this.props.getRandomImage();  
- 
+    this.props.getRandomImage(); 
 }
+  
+  substractName = (name) => {
+    name = decodeURIComponent(name);
+    name = name.substring(30);
+    name = name.substring(0, name.lastIndexOf("/"));
+    const newName = name.includes("-") ? name.substring(0, name.lastIndexOf("-")) : name
+    return newName;
+    
+  }  
+
+
   render() {
+    const imageUrl = this.props.randomImage;
     return (
       <div>
         <h1>I'm a game 1</h1>
-        <img src={this.props.randomImage}></img>     
+        <img src={imageUrl} alt="random dog"></img>
+        <p>{this.substractName (imageUrl)}</p>    
         <p>please choose correct answer:</p>
-    {answers.map((answer,index )=> <div className="radio" key={index} ><input type="radio" value={answer}  />{answer}</div>)}
-
-
+        {answers.map((answer,index )=> 
+          <div className="radio" key={index} >
+            <input type="radio" value={answer} />{answer}
+         </div>)}
       </div>
        
-      
-
-   
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log("state", state.randomImage);
+  console.log("state", state);
   return {
       randomImage: state.randomImage
   }
