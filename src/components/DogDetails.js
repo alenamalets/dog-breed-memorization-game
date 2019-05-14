@@ -19,7 +19,7 @@ import { getImages } from '../actions/getImages'
                <h1>dog details</h1> 
                {this.props.Images.slice(0, 10).map((url,index) => 
                     <p>
-                      {index}- <img src={url} width={200}></img>
+                      {index}- <img  key={index} src={url} width={200}></img>
                     </p>  
                 )}        
             </div>
