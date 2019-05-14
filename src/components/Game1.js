@@ -6,19 +6,30 @@ class Game1 extends Component {
 
   componentDidMount(){
     this.props.getRandomImage();
-}
+  }
+
+  substractName = (name) => {
+    name = decodeURIComponent(name);
+    name = name.substring(30);
+    name = name.substring(0, name.lastIndexOf("/"));
+    const newName = name.includes("-") ? name.substring(0, name.lastIndexOf("-")) : name
+    return newName;
+    
+  }  
   render() {
+    const imageUrl = this.props.randomImage;
     return (
       <div>
         <h1>I'm a game 1</h1>
-        <img src={this.props.randomImage}></img>
+        <img src={imageUrl} alt="random dog"></img>
+        <p>{this.substractName (imageUrl)}</p>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log("state", state.randomImage);
+  console.log("state", state);
   return {
       randomImage: state.randomImage
   }
