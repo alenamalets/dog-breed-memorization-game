@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {getRandomImage} from '../actions/getRandomImage'
 import {getDogs} from '../actions/getDogs'
 import { connect } from 'react-redux';
+import './Game1.css'
 
 class Game1 extends Component {
   componentDidMount(){  
@@ -48,6 +49,7 @@ class Game1 extends Component {
     return array;
   };
 
+
   render() {
     const imageUrl = this.props.randomImage;
     const answers = ['','',''];
@@ -59,6 +61,10 @@ class Game1 extends Component {
       <div>
         <h1>I'm a game 1</h1>
         <img src={imageUrl} alt="random dog"></img>  
+        <div id="myProgress">
+          <div id="myBar" style={{ width: this.props.score / 100 }}></div>
+        </div>
+        <button onclick="move()">Click Me</button> 
         <p>please choose correct answer:</p>
         {answers.map((answer,index )=> 
           <div className="radio" key={index} >
