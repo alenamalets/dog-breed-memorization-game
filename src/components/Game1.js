@@ -75,11 +75,12 @@ class Game1 extends Component {
         setTimeout(()=>{
           this.props.getRandomImage();
           this.setState({questionCounter: this.state.questionCounter+1}) 
-          alert(`Finish, your score ${this.state.correctAnswer * 20}%`)
-          window.location.reload();
-        },2000);
-        
+        },100); 
       } 
+      setTimeout(()=> {
+        alert(`Finish, your score ${this.state.correctAnswer * 20}%`)
+        window.location.reload()
+      },200)
     }
     if(maxQuestionCount > this.state.questionCounter){
         if(event.target.value===correctAnswer){           
