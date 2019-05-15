@@ -23,13 +23,10 @@ class App extends Component{
       {
         this.props.dogs.length === 0 ? <p>loading...</p> : 
         <>
-          {/* <Nav/>
-          <Route exact path="/" component={DogList} />
-          <Route exact path="/dog/:name" component={DogDetails} />
-          <Route exact path="/game1" component={Game1} />
-          <Route exact path="/game2" component={Game2} />
-          <Route exact path="/game3" component={Game3} /> */}
-          <GameOne />
+          <Nav/>
+          <Route exact path="/" component={GameOne} />
+          <Route exact path="/practice" component={DogList} />
+          <Route exact path="/practice/:name" component={DogDetails} />
         </>
       } 
     </div>
