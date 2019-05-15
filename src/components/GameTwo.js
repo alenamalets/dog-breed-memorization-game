@@ -13,6 +13,7 @@ import "./GameOne.css"
 
  //console.log(this.props.correctAnswer)
    
+
    // console.log(event.target.getAttribute('data-url'));
 
     if(this.props.questionCount < 5){
@@ -44,6 +45,9 @@ import "./GameOne.css"
     }
 
 
+
+   
+
   }
 
   render() {
@@ -54,8 +58,8 @@ import "./GameOne.css"
         
           {this.props.images.length === 0 ?
             <p>loading...</p> : 
-           
             <p>                     
+
              {this.props.correctAnswer.toUpperCase()}              
              {this.props.images.map((url,index) =>
 
@@ -63,14 +67,14 @@ import "./GameOne.css"
              
              )}
              
+
            </p>
+           
          
         } 
-        
-            
-        
-            
-      
+        <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
+          <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
+        </div>
       </div>
     )
   }
