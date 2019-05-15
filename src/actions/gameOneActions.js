@@ -90,10 +90,15 @@ export function incrementQuestionCount(oldCount){
 
 export function handleClick(event){
   const clickedItem = event.target.value;
-  return {
-    type: CLICKED_ITEM,
-    payload: {
-      clicked: clickedItem
-    }
+  console.log(clickedItem);
+
+  return function (dispatch){
+    dispatch({
+      type: CLICKED_ITEM,
+      payload: {
+        givenAnswer: clickedItem
+      }
+    });
+    dispatch(getRandomImage());
   }
 }

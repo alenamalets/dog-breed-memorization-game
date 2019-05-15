@@ -43,7 +43,7 @@ class GameOne extends Component {
             <label key={answer}>
               {answer}
               <input type="radio" value={answer} id={answer} name="answer" 
-              onChange={this.handleChange} />
+              onChange={this.props.handleClick} />
             </label>  
           </div>
         );

@@ -6,7 +6,7 @@ const initialState = {
     answers: [],
     correctCount: 0,
     questionCount: 1,
-    clicked: ''
+    givenAnswer: ''
 }
 
 const reducer = (state = initialState, action = {}) => {
