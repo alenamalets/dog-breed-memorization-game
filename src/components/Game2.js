@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import {getRandomImage} from '../actions/game2action'
 
-export default class Game1 extends Component {
+ class Game2 extends Component {
+
+  componentDidMount(){
+    this.props.getRandomImage();
+  }
   render() {
     return (
       <div>
@@ -9,3 +15,15 @@ export default class Game1 extends Component {
     )
   }
 }
+
+
+
+const mapStateToProps = (state) => {
+  console.log("state",state.game2reducer);
+  
+  return {
+    ...state.game2reducer
+  }
+}
+
+export default connect(mapStateToProps, {getRandomImage})(Game2);
