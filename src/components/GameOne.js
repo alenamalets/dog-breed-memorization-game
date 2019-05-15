@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-  getRandomImage, incrementCorrectCount, incrementQuestionCount, handleClick
+  getRandomImage, incrementCorrectCount, incrementQuestionCount, handleClick,changeColor
 } from '../actions/gameOneActions'
 import { connect } from 'react-redux';
 import './GameOne.css'
@@ -8,6 +8,7 @@ import './GameOne.css'
 class GameOne extends Component {
   componentDidMount(){
     this.props.getRandomImage();
+    console.log(this.props.isInAnswerMode);
   }
 
   handleChange = (event) => {
@@ -17,9 +18,15 @@ class GameOne extends Component {
         this.props.incrementQuestionCount(this.props.questionCount);
         this.props.getRandomImage();
       } else {
+
+      
+        this.props.changeColor(true);
+
         setTimeout(()=> {
           this.props.getRandomImage();
+          this.props.changeColor(false);
           this.props.incrementQuestionCount(this.props.questionCount);
+
         }, 2000);
       }
     }else {
@@ -40,10 +47,13 @@ class GameOne extends Component {
   displayAnswers = () => {
     return this.props.answers.length === 0 ?
       <p>loading...</p> : 
+      
       this.props.answers.map((answer, index) => {
         return (
+          
           <div className="radio" key={index} >
-            <label key={answer}>
+            
+            <label key={answer} className={(answer===this.props.correctAnswer)?this.props.greenColor:this.props.redColor}>
               {answer}
               <input type="radio" value={answer} id={answer} name="answer" 
               onChange={this.handleChange} />
@@ -68,11 +78,12 @@ class GameOne extends Component {
 }
 
 const mapStateToProps = (state) => {
+ 
   return {
     ...state.randomImage
   }
 }
 
 export default connect(mapStateToProps, { 
-  getRandomImage, incrementCorrectCount, incrementQuestionCount, handleClick
+  getRandomImage, incrementCorrectCount, incrementQuestionCount, handleClick ,changeColor
 })(GameOne);

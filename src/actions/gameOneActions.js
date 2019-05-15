@@ -3,6 +3,7 @@ export const SET_RANDOM_IMAGE = 'SET_RANDOM_IMAGE';
 export const INCREMENT_CORRECT_COUNT = 'INCREMENT_CORRECT_COUNT';
 export const INCREMENT_QUESTION_COUNT = 'INCREMENT_QUESTION_COUNT';
 export const CLICKED_ITEM = 'CLICKED_ITEM';
+export const CHANGE_COLOR = "CHANGE_COLOR"
 
 const substractName = (name) => {
   name = decodeURIComponent(name);
@@ -77,6 +78,30 @@ export function incrementCorrectCount(oldCount){
     }
   }
 }
+
+
+export function changeColor(isInAnswerMode){
+
+  let redcolor=""
+  let greencolor=""
+  if(isInAnswerMode){
+    redcolor="red"
+    greencolor="green"
+  }
+  
+     
+  return {
+    type: CHANGE_COLOR,
+    payload: {
+      redColor:redcolor,
+      greenColor:greencolor   
+    }
+  }
+
+}
+
+
+
 
 export function incrementQuestionCount(oldCount){
   const incrementedCount = oldCount+1;
