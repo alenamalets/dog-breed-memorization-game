@@ -11,28 +11,27 @@ import "./GameOne.css"
 
   handleChange = (event) => {
 
- //console.log(this.props.correctAnswer)
-   
-   // console.log(event.target.getAttribute('data-url'));
+
 
     if(this.props.questionCount < 5){
 
-      this.props.incrementQuestionCount(this.props.questionCount);
+      
 
       if(event.target.getAttribute('data-url') === this.props.correctAnswer){
 
         this.props.incrementCorrectCount(this.props.correctCount);
+        this.props.incrementQuestionCount(this.props.questionCount);
         this.props.getRandomImage();
 
       } else {
 
         setTimeout(()=> {
           this.props.getRandomImage();
+          this.props.incrementQuestionCount(this.props.questionCount);
         }, 2000);
 
       }
     }else {
-      this.props.incrementQuestionCount(this.props.questionCount);
       if(event.target.value === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
         alert('game has finished')
@@ -44,33 +43,38 @@ import "./GameOne.css"
     }
 
 
+
+   
+
   }
 
   render() {
     
     return (
       <div>
-        <h1>I'm a game 2</h1>        
+             
         
           {this.props.images.length === 0 ?
             <p>loading...</p> : 
-           
             <p>                     
-             {this.props.correctAnswer.toUpperCase()}              
+
+             <b>{this.props.correctAnswer.toUpperCase()} </b>
+             <p>Question: {this.props.questionCount} /5</p>
+             <br></br>             
              {this.props.images.map((url,index) =>
 
-             <img width={120} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+             <img width={120} height={300} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
              
              )}
              
+
            </p>
+           
          
         } 
-        
-            
-        
-            
-      
+        <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
+          <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
+        </div>
       </div>
     )
   }
