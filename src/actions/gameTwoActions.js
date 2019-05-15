@@ -1,7 +1,8 @@
 import * as request from 'superagent';
 import {answersNoRepeat} from './gameOneActions'
 export const GAME_2 = 'GAME_2';
-
+export const INCREMENT_CORRECT_COUNT = 'INCREMENT_CORRECT_COUNT';
+export const INCREMENT_QUESTION_COUNT = 'INCREMENT_QUESTION_COUNT';   
 
 export function getCorrectName (dogList){
     const correctName = dogList[Math.floor(Math.random()*dogList.length)];
@@ -43,6 +44,26 @@ export function setupQuestion(dogsList, correctAnswer, allAnswers, allImages){
       correctAnswer: correctAnswer,
       answers: allAnswers,
       images: allImages
+    }
+  }
+}
+
+export function incrementCorrectCount(oldCount){
+  const incrementedCount = oldCount+1;
+  return {
+    type: INCREMENT_CORRECT_COUNT,
+    payload: {
+      correctCount: incrementedCount
+    }
+  }
+}
+
+export function incrementQuestionCount(oldCount){
+  const incrementedCount = oldCount+1;
+  return {
+    type: INCREMENT_QUESTION_COUNT,
+    payload: {
+      questionCount: incrementedCount
     }
   }
 }
