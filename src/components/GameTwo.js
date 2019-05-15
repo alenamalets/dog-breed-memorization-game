@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import {getRandomImage} from '../actions/gameTwoActions'
+import {getRandomImage,incrementCorrectCount, incrementQuestionCount} from '../actions/gameTwoActions'
 import "./GameOne.css"
 
  class Game2 extends Component {
@@ -10,23 +10,58 @@ import "./GameOne.css"
   }
 
   handleChange = (event) => {
+
+ //console.log(this.props.correctAnswer)
    
-    console.log(event.target.getAttribute('data-url'));
+   // console.log(event.target.getAttribute('data-url'));
+
+    if(this.props.questionCount < 5){
+
+      this.props.incrementQuestionCount(this.props.questionCount);
+
+      if(event.target.getAttribute('data-url') === this.props.correctAnswer){
+
+        this.props.incrementCorrectCount(this.props.correctCount);
+        this.props.getRandomImage();
+
+      } else {
+
+        setTimeout(()=> {
+          this.props.getRandomImage();
+        }, 2000);
+
+      }
+    }else {
+      this.props.incrementQuestionCount(this.props.questionCount);
+      if(event.target.value === this.props.correctAnswer){
+        this.props.incrementCorrectCount(this.props.correctCount);
+        alert('game has finished')
+      }else {
+        setTimeout(()=> {
+          alert('game has finished')
+        }, 2000);
+      }
+    }
+
+
   }
 
   render() {
-    const i="url";
+    
     return (
       <div>
-        <h1>I'm a game 2</h1>      
-
-        {this.props.answers.length === 0 ?
+        <h1>I'm a game 2</h1>        
+        
+          {this.props.images.length === 0 ?
             <p>loading...</p> : 
            
             <p>                     
-              <p>{this.props.correctAnswer.toUpperCase()}</p>
-              
-                  {this.props.images.map((url,index) =><p key={index}> <img data-url={i}  onClick={this.handleChange}  key={index} src={url}/> </p>)}
+             {this.props.correctAnswer.toUpperCase()}              
+             {this.props.images.map((url,index) =>
+
+             <img width={120} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+             
+             )}
              
            </p>
          
@@ -53,4 +88,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {getRandomImage})(Game2);
+export default connect(mapStateToProps, {getRandomImage, incrementCorrectCount, incrementQuestionCount})(Game2);
