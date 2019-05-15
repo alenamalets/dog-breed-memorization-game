@@ -25,8 +25,10 @@ class App extends Component{
         <>
           <Nav/>
           <Route exact path="/" component={GameOne} />
+          <Route exact path="/game2" component={Game2} />
           <Route exact path="/practice" component={DogList} />
           <Route exact path="/practice/:name" component={DogDetails} />
+        
         </>
       } 
     </div>

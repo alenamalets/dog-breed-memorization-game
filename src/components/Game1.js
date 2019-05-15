@@ -9,7 +9,9 @@ class Game1 extends Component {
 
   state={
     questionCounter:0,
-    correctAnswer:0
+    correctAnswer:0,
+    correctcolor:"",
+    wrongcolor:""
   } 
 
   componentDidMount(){  
@@ -83,17 +85,28 @@ class Game1 extends Component {
       },200)
     }
     if(maxQuestionCount > this.state.questionCounter){
-        if(event.target.value===correctAnswer){           
+
+        if(event.target.value===correctAnswer){ 
+
           this.setState({correctAnswer: this.state.correctAnswer+1})
           this.setState({questionCounter: this.state.questionCounter+1}) 
           this.props.getRandomImage()                     
           console.log("correct answer")
+
         }else{
+
           console.log("oops");
+
+          this.setState({correctcolor: "green"})
+          this.setState({wrongcolor: "red"})
+
           setTimeout(()=>{
             this.props.getRandomImage();
             this.setState({questionCounter: this.state.questionCounter+1}) 
+           this.setState({correctcolor: ""})
+            this.setState({wrongcolor: ""})
           },2000);
+
         } 
      }
    
@@ -107,6 +120,7 @@ class Game1 extends Component {
     const imageUrl = this.props.randomImage;
     const answers = ['','',''];
     answers[0] = this.substractName (imageUrl);
+    const correctAnswer = this.substractName (imageUrl)
 
     this.answersNoRepeat(this.props.dogs, answers);
     this.shuffle(answers);
@@ -121,7 +135,7 @@ class Game1 extends Component {
         <p>please choose correct answer:</p>
         {answers.map((answer,index )=> 
           <div className="radio" key={index} >
-          <label key={answer} >
+          <label id={answer}  key={answer} className={(answer===correctAnswer)?this.state.correctcolor:this.state.wrongcolor} >
             <input type="radio" value={answer} id={answer} name="answer" onChange={this.handleChange}   />{answer}
           </label>  
          </div>)}
