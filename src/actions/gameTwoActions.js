@@ -22,15 +22,15 @@ export function getRandomImage(){
     request(`https://dog.ceo/api/breed/${allAnswers[0]}/images`)
       .then(response => {
         allImages.push(pickRandomImgUrl(response.body.message));
-      })
-    request(`https://dog.ceo/api/breed/${allAnswers[1]}/images`)
-      .then(response => {
-        allImages.push(pickRandomImgUrl(response.body.message));
-      })
-    request(`https://dog.ceo/api/breed/${allAnswers[2]}/images`)
-      .then(response => {
-        allImages.push(pickRandomImgUrl(response.body.message));
-        dispatch(setupQuestion(dogsList, correctAnswer, allAnswers, allImages))
+        request(`https://dog.ceo/api/breed/${allAnswers[1]}/images`)
+        .then(response => {
+          allImages.push(pickRandomImgUrl(response.body.message));
+          request(`https://dog.ceo/api/breed/${allAnswers[2]}/images`)
+          .then(response => {
+            allImages.push(pickRandomImgUrl(response.body.message));
+            dispatch(setupQuestion(dogsList, correctAnswer, allAnswers, allImages))
+          })
+        })
       })
   }
 }
