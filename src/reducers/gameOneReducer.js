@@ -1,11 +1,13 @@
 import { 
-    SET_RANDOM_IMAGE, INCREMENT_CORRECT_COUNT, INCREMENT_QUESTION_COUNT, CLICKED_ITEM 
+    SET_RANDOM_IMAGE, INCREMENT_CORRECT_COUNT, INCREMENT_QUESTION_COUNT, CLICKED_ITEM ,CHANGE_COLOR
 } from '../actions/gameOneActions';
 
 const initialState = {
     answers: [],
     correctCount: 0,
     questionCount: 1,
+    redColor:"",
+    greenColor:"",    
     clicked: ''
 }
 
@@ -19,6 +21,9 @@ const reducer = (state = initialState, action = {}) => {
             return {...state, ...action.payload};
         case CLICKED_ITEM:
             return {...state, ...action.payload};
+        case CHANGE_COLOR:
+            return {...state, ...action.payload};    
+
         default:
             return state
     }
