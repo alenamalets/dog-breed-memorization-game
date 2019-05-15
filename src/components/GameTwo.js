@@ -11,7 +11,7 @@ import "./GameOne.css"
 
   handleChange = (event) => {
    
-    console.log(event.target.getAttribute('data-url'));
+    console.log(event.target.getAttribute('src'));
   }
 
   render() {
@@ -22,20 +22,17 @@ import "./GameOne.css"
 
         {this.props.answers.length === 0 ?
             <p>loading...</p> : 
-           
             <p>                     
-              <p>{this.props.correctAnswer.toUpperCase()}</p>
+              {this.props.correctAnswer.toUpperCase()}
               
-                  {this.props.images.map((url,index) =><p key={index}> <img data-url={i}  onClick={this.handleChange}  key={index} src={url}/> </p>)}
-             
+                  {this.props.images.map((url,index) => <img data-url={i}  onClick={this.handleChange}  key={index} src={url}/> )} 
            </p>
+           
          
         } 
-        
-            
-        
-            
-      
+        <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
+          <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
+        </div>
       </div>
     )
   }
