@@ -11,25 +11,28 @@ class GameOne extends Component {
   }
 
   handleChange = (event) => {
-    if(this.props.questionCount < 5){
-      this.props.incrementQuestionCount(this.props.questionCount);
+    if(this.props.questionCount < 5){ 
       if(event.target.value === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
+        this.props.incrementQuestionCount(this.props.questionCount);
         this.props.getRandomImage();
       } else {
         setTimeout(()=> {
           this.props.getRandomImage();
+          this.props.incrementQuestionCount(this.props.questionCount);
         }, 2000);
       }
     }else {
-      this.props.incrementQuestionCount(this.props.questionCount);
       if(event.target.value === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
-        alert('game has finished')
+        setTimeout(()=> {
+          alert('game has finished')
+        }, 1000)
       }else {
         setTimeout(()=> {
           alert('game has finished')
         }, 2000);
+       
       }
     }
   }
@@ -53,6 +56,7 @@ class GameOne extends Component {
   render() {
     return (
       <div>
+        <p>Question: {this.props.questionCount} /5</p>
         <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
         <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
           <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
