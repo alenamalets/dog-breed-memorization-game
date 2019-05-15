@@ -13,7 +13,7 @@ class DogDetails extends Component{
         <h3>{this.props.match.params.name}</h3> 
         {this.props.Images.slice(0, 10).map((url,index) => 
           <p key={index}>
-            {index}- <img src={url} width={200} alt={index}></img>
+            <img src={url} width={200} alt={index}></img>
           </p>  
         )}        
       </div>
