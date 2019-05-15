@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getDogs } from '../actions/getDogs'
 import { Link } from 'react-router-dom'
 
 class DogList extends Component {
@@ -9,7 +8,7 @@ class DogList extends Component {
             .map((dog, index) => {
                 return (
                     <li key={index}>
-                        <Link to={`/practice/${dog}`}>
+                        <Link to={`/doglist/${dog}`}>
                             {dog}
                         </Link>
                     </li>
@@ -32,4 +31,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getDogs })(DogList)
+export default connect(mapStateToProps)(DogList)

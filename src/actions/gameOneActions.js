@@ -12,7 +12,7 @@ const substractName = (name) => {
   return newName;
 }  
 
-const answersNoRepeat = (dogsList, correctAnswer) => {
+export const answersNoRepeat = (dogsList, correctAnswer) => {
   const answers = [];
   answers.push(correctAnswer);
 

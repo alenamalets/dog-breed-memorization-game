@@ -1,4 +1,4 @@
-import {GAME_2} from '../actions/game2action'
+import {GAME_2} from '../actions/gameTwoActions'
 
 const initialState = {
     answers: []
