@@ -1,7 +1,8 @@
 import {GAME_2} from '../actions/gameTwoActions'
 
 const initialState = {
-    answers: []
+    answers: [],
+    images: []
 }
 
 const reducer = (state = initialState, action = {}) => {
