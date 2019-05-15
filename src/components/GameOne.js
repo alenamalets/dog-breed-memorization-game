@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import {
   getRandomImage, incrementCorrectCount, incrementQuestionCount, handleClick
-} from '../actions/getRandomImage'
+} from '../actions/gameOneActions'
 import { connect } from 'react-redux';
+import './GameOne.css'
 
 class GameOne extends Component {
   componentDidMount(){

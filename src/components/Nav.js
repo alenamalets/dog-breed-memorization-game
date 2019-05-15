@@ -9,7 +9,7 @@ export default class Nav extends Component{
                 <span><a href="/">game 1</a></span>  
                 <span><a href="/game2">game 2</a></span>   
                 <span><a href="/game3">game 3</a></span>   
-                <span><a href="/practice">practice</a></span>              
+                <span><a href="/doglist">dog list</a></span>              
             </div>
         );
     }

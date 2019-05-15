@@ -1,6 +1,6 @@
 import { 
     SET_RANDOM_IMAGE, INCREMENT_CORRECT_COUNT, INCREMENT_QUESTION_COUNT, CLICKED_ITEM 
-} from '../actions/getRandomImage';
+} from '../actions/gameOneActions';
 
 const initialState = {
     answers: [],

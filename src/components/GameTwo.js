@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import {getRandomImage} from '../actions/game2action'
+import {getRandomImage} from '../actions/gameTwoActions'
 
  class Game2 extends Component {
 

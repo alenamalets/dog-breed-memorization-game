@@ -1,25 +1,11 @@
 import * as request from 'superagent';
+import {answersNoRepeat} from './gameOneActions'
 export const GAME_2 = 'GAME_2';
 
 
 export function getCorrectName (dogList){
     const correctName = dogList[Math.floor(Math.random()*dogList.length)];
     return correctName
-}
-
-const answersNoRepeat = (dogsList, correctAnswer) => {
-    const answers = [];
-    answers.push(correctAnswer);
-  
-    for(let i=0; i<2; i++){
-        const filterTarget = answers[i];
-        dogsList = dogsList.filter(dog => {
-            return dog !== filterTarget;
-        })
-        const randomAnswer = dogsList[Math.floor(Math.random() * dogsList.length)];
-        answers.push(randomAnswer);
-    }
-    return answers;
 }
 
 export function getUrlArray(arrayofnames) {

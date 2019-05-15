@@ -4,13 +4,10 @@ import Nav from "./components/Nav"
 import DogList from "./components/DogList"
 import DogDetails from "./components/DogDetails"
 import './App.css';
-import Game1 from './components/Game1';
-import Game2 from './components/Game2';
-import Game3 from './components/Game3';
+import GameTwo from './components/GameTwo';
 import GameOne from './components/GameOne';
-import { getRandomImage } from './actions/getRandomImage';
 import { connect } from 'react-redux';
-import { getDogs } from './actions/getDogs';
+import { getDogs } from './actions/dogListActions';
 
 class App extends Component{
   componentDidMount(){
@@ -25,9 +22,9 @@ class App extends Component{
         <>
           <Nav/>
           <Route exact path="/" component={GameOne} />
-          <Route exact path="/game2" component={Game2} />
-          <Route exact path="/practice" component={DogList} />
-          <Route exact path="/practice/:name" component={DogDetails} />
+          <Route exact path="/game2" component={GameTwo} />
+          <Route exact path="/doglist" component={DogList} />
+          <Route exact path="/doglist/:name" component={DogDetails} />
         
         </>
       } 

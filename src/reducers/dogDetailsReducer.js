@@ -1,9 +1,11 @@
-import { SET_DOGS } from '../actions/getDogs'
+import { SET_IMAGES } from '../actions/dogDetailsActions'
 
 const reducer = (state = [], action = {}) => {
+    
     switch (action.type) {
-        case SET_DOGS:  
-            return Object.keys(action.payload)
+         case SET_IMAGES:  
+            return action.payload
+
         default:
             return state
     }

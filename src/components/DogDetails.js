@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { connect } from 'react-redux'
-import { getImages } from '../actions/getImages'
+import { getImages } from '../actions/dogDetailsActions'
 
 class DogDetails extends Component{
   componentDidMount(){
@@ -12,8 +12,8 @@ class DogDetails extends Component{
       <div>
         <h3>{this.props.match.params.name}</h3> 
         {this.props.Images.slice(0, 10).map((url,index) => 
-          <p>
-            {index}- <img  key={index} src={url} width={200}></img>
+          <p key={index}>
+            {index}- <img src={url} width={200} alt={index}></img>
           </p>  
         )}        
       </div>
