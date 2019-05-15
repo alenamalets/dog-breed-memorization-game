@@ -52,7 +52,6 @@ class GameOne extends Component {
   render() {
     return (
       <div>
-        <h1>This is my game</h1>
         <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
         <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
           <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
