@@ -80,7 +80,7 @@ export function changeColor(isInAnswerMode){
     redcolor="red"
     greencolor="green"
   }
- 
+  
   return {
     type: CHANGE_COLOR,
     payload: {
