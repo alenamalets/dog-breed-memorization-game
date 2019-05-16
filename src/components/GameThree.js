@@ -4,7 +4,7 @@ import {
   startGameThree, incrementCorrectCount, incrementQuestionCount, changeColor
 } from '../actions/gameThreeActions'
 import { connect } from 'react-redux';
-import './GameOne.css'
+import './GameThree.css'
 
 
  class GameThree extends Component {
@@ -37,7 +37,9 @@ import './GameOne.css'
           alert('game has finished')
         }, 1000)
       }else {
+        this.props.changeColor(true);
         setTimeout(()=> {
+          this.props.changeColor(false);
           alert('game has finished')
         }, 2000);
       }
@@ -52,6 +54,7 @@ import './GameOne.css'
           <div>
                <p>Question: {this.props.questionCount} /5</p>
               <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
+              <div>{this.props.correctCount*20}%</div>
               <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
                 <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
               </div>
@@ -78,17 +81,19 @@ import './GameOne.css'
              <br></br>             
              {this.props.images.map((url,index) =>
 
-             <img width={120} height={300} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+             <img className={(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor2:this.props.redColor2}
+             width={120} height={300} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
              
              )}
 
-
+          <div>{this.props.correctCount*20}%</div>  
           <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
                <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
            </div>
             
           </div>
-      }
+
+}
    
       </div>
     )

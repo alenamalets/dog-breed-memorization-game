@@ -76,16 +76,23 @@ export function incrementQuestionCount(oldCount){
 export function changeColor(isInAnswerMode){
   let redcolor=""
   let greencolor=""
+  let redcolor2=""
+  let greencolor2=""
   if(isInAnswerMode){
     redcolor="red"
     greencolor="green"
+    redcolor2="redcolor"
+    greencolor2="greencolor" 
   }
   
   return {
     type: CHANGE_COLOR,
     payload: {
       redColor:redcolor,
-      greenColor:greencolor   
+      greenColor:greencolor,
+      redColor2:redcolor2,
+      greenColor2:greencolor2,
+      
     }
   }
 }
