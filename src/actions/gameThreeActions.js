@@ -3,6 +3,8 @@ export const GAME_3 = 'GAME_3';
 export const INCREMENT_CORRECT_COUNT = 'INCREMENT_CORRECT_COUNT';
 export const INCREMENT_QUESTION_COUNT = 'INCREMENT_QUESTION_COUNT';  
 export const CHANGE_COLOR = "CHANGE_COLOR"; 
+export const GAME_PICKER = "GAME_PICKER"; 
+
 
 function getCorrectName (dogList){
     const correctName = dogList[Math.floor(Math.random()*dogList.length)];
@@ -107,7 +109,7 @@ export function gameOneToProps(dogsList, randomImageUrl){
 }
 
 export function startGameOne(){
-  return function (dispatch, getState){  
+   return function (dispatch, getState){  
     request('https://dog.ceo/api/breeds/image/random')
       .then(response => {
         const dogsList = getState().dogsList;
@@ -152,7 +154,7 @@ export function gameTwoToProps(dogsList, correctAnswer, shuffledAnswers, allImag
 }
 
 export function startGameThree(){
-  gamePicker = Math.floor(Math.random()*2);
+ const gamePicker = Math.floor(Math.random()*2);
   if(gamePicker){
     startGameOne();
   }

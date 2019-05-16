@@ -12,11 +12,11 @@ const initialState = {
     questionCount: 1,
     redColor:"",
     greenColor:"",
-    randomNumber:0
+    gamePicker:0
    
 }
 
-const reducer = (state = initialState, action = {}) => {
+const  game3reducer= (state = initialState, action = {}) => {
 
     switch (action.type) {
         
@@ -43,4 +43,4 @@ const reducer = (state = initialState, action = {}) => {
     }
 }
 
-export default reducer
+export default game3reducer
