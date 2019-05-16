@@ -88,6 +88,7 @@ class GameOne extends Component {
         </div> 
         {this.displayAnswers()}
       </div>
+      </div>
     )
   }
 }
