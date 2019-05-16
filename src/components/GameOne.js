@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-  getRandomImage, incrementCorrectCount, incrementQuestionCount, handleClick,changeColor
+  getRandomImage, incrementCorrectCount, incrementQuestionCount, changeColor
 } from '../actions/gameOneActions'
 import { connect } from 'react-redux';
 import './GameOne.css'
@@ -95,5 +95,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, { 
-  getRandomImage, incrementCorrectCount, incrementQuestionCount, handleClick ,changeColor
+  getRandomImage, incrementCorrectCount, incrementQuestionCount, changeColor
 })(GameOne);
