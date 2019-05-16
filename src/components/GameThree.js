@@ -55,7 +55,10 @@ const amountOfQuestions = 10;
         <h1>I'm a game 3</h1>
         {this.props.gamePicker===0?
           <div>
+
+
                <p>Question: {this.props.questionCount} /10</p>
+
               <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
               <div>{this.props.correctCount*10}%</div>
               <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
@@ -74,7 +77,9 @@ const amountOfQuestions = 10;
                 </label>  
               </div>
             );
-          })}   
+
+          })}
+
           </div>
           :
           <div>
@@ -84,8 +89,11 @@ const amountOfQuestions = 10;
              <br></br>             
              {this.props.images.map((url,index) =>
 
-             <img className={(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor2:this.props.redColor2}
-             width={120} height={300} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+
+
+             <img className="game2-pic" {(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor2:this.props.redColor2}
+              data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+
              
              )}
 
@@ -94,10 +102,12 @@ const amountOfQuestions = 10;
                <div id="myBar" style={{ width: this.props.correctCount * 10 + '%'}}></div>
            </div>
             
+
           </div>
 
 }         <br></br>
           <button onClick={this.newgame}>START NEW GAME</button>
+
    
       </div>
     )

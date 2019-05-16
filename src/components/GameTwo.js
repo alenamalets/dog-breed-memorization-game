@@ -40,30 +40,36 @@ const amountOfQuestions = 10;
           alert('game has finished')
         }, 2000);
       }
+
     }
   }
 
   newgame = () => {
     window.location.reload();
+
   }
 
   render() {
     
     return (
-      <div>
-             
+      <div>            
         
           {this.props.images.length === 0 ?
             <p>loading...</p> : 
-            <p>                     
+            <p>                
 
              <b>{this.props.correctAnswer.toUpperCase()} </b>
              <p>Question: {this.props.questionCount} /10</p>
              <br></br>             
              {this.props.images.map((url,index) =>
 
-             <img className={(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor:this.props.redColor}
-             width={120} height={300} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+ 
+             <img className="game2-pic" data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+
+
+             <img className="game2-pic" {(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor:this.props.redColor}
+              data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+
              
              )}
              

@@ -74,8 +74,13 @@ class GameOne extends Component {
 
   render() {
     return (
+
+      <div className="progress" >
+        
+
       <div>
         <p>Question: {this.props.questionCount} /10</p>
+
         <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
         <div>{this.props.correctCount*10}%</div>
         <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
