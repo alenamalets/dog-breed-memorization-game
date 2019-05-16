@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {getRandomImage,incrementCorrectCount, incrementQuestionCount, changeColor} from '../actions/gameTwoActions'
 import "./GameTwo.css"
 
+const amountOfQuestions = 10;
  class Game2 extends Component {
 
   componentDidMount(){
@@ -12,7 +13,7 @@ import "./GameTwo.css"
   handleChange = (event) => {
 
 
-    if(this.props.questionCount < 5){      
+    if(this.props.questionCount < amountOfQuestions){      
 
       if(event.target.getAttribute('data-url') === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
@@ -58,7 +59,7 @@ import "./GameTwo.css"
             <p>                     
 
              <b>{this.props.correctAnswer.toUpperCase()} </b>
-             <p>Question: {this.props.questionCount} /5</p>
+             <p>Question: {this.props.questionCount} /10</p>
              <br></br>             
              {this.props.images.map((url,index) =>
 
@@ -72,9 +73,9 @@ import "./GameTwo.css"
            
          
         } 
-        <div>{this.props.correctCount*20}%</div>
+        <div>{this.props.correctCount*10}%</div>
         <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
-          <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
+          <div id="myBar" style={{ width: this.props.correctCount * 10 + '%'}}></div>
         </div>
       </div>
     )

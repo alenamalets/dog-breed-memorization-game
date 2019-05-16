@@ -5,6 +5,7 @@ import {
 import { connect } from 'react-redux';
 import './GameOne.css'
 
+const amountOfQuestions = 10;
 class GameOne extends Component {
   componentDidMount(){
     this.props.getRandomImage();
@@ -12,7 +13,7 @@ class GameOne extends Component {
   }
 
   handleChange = (event) => {
-    if(this.props.questionCount < 5){ 
+    if(this.props.questionCount < amountOfQuestions){ 
       if(event.target.value === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
         this.props.incrementQuestionCount(this.props.questionCount);
@@ -68,11 +69,11 @@ class GameOne extends Component {
   render() {
     return (
       <div>
-        <p>Question: {this.props.questionCount} /5</p>
+        <p>Question: {this.props.questionCount} /10</p>
         <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
-        <div>{this.props.correctCount*20}%</div>
+        <div>{this.props.correctCount*10}%</div>
         <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
-          <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
+          <div id="myBar" style={{ width: this.props.correctCount * 10 + '%'}}></div>
         </div> 
         {this.displayAnswers()}
       </div>
