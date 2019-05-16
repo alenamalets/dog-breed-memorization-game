@@ -1,8 +1,8 @@
-
-import {GAME_3,
-        INCREMENT_CORRECT_COUNT,
-        INCREMENT_QUESTION_COUNT ,
-        CHANGE_COLOR
+import {
+    GAME_THREE_DATA,
+    INCREMENT_CORRECT_COUNT_THREE,
+    INCREMENT_QUESTION_COUNT_THREE,
+    CHANGE_COLOR_THREE
 } from '../actions/gameThreeActions'
 
 const initialState = {
@@ -13,31 +13,21 @@ const initialState = {
     redColor:"",
     greenColor:"",
     gamePicker:0
-   
 }
 
-const  game3reducer= (state = initialState, action = {}) => {
-
+const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
-        
-        case GAME_3:  
+        case GAME_THREE_DATA:  
             return {...state, ...action.payload}
-
-        case INCREMENT_CORRECT_COUNT:
-
+        case INCREMENT_CORRECT_COUNT_THREE:
             return {...state, ...action.payload}
-
-        case INCREMENT_QUESTION_COUNT: 
-
+        case INCREMENT_QUESTION_COUNT_THREE: 
             return {...state, ...action.payload}
-
-        case CHANGE_COLOR:
-
-            return {...state, ...action.payload};    
-              
+        case CHANGE_COLOR_THREE:
+            return {...state, ...action.payload};                
         default:
             return state
     }
 }
 
-export default game3reducer
+export default reducer

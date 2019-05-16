@@ -1,8 +1,8 @@
 import * as request from 'superagent';
-export const GAME_3 = 'GAME_3';
-export const INCREMENT_CORRECT_COUNT = 'INCREMENT_CORRECT_COUNT';
-export const INCREMENT_QUESTION_COUNT = 'INCREMENT_QUESTION_COUNT';  
-export const CHANGE_COLOR = "CHANGE_COLOR"; 
+export const GAME_THREE_DATA = 'GAME_THREE_DATA';
+export const INCREMENT_CORRECT_COUNT_THREE = 'INCREMENT_CORRECT_COUNT_THREE';
+export const INCREMENT_QUESTION_COUNT_THREE = 'INCREMENT_QUESTION_COUNT_THREE';  
+export const CHANGE_COLOR_THREE = "CHANGE_COLOR_THREE"; 
 
 function getCorrectName (dogList){
     const correctName = dogList[Math.floor(Math.random()*dogList.length)];
@@ -56,7 +56,7 @@ const shuffleAnswers = (array) => {
 export function incrementCorrectCount(oldCount){
   const incrementedCount = oldCount+1;
   return {
-    type: INCREMENT_CORRECT_COUNT,
+    type: INCREMENT_CORRECT_COUNT_THREE,
     payload: {
       correctCount: incrementedCount
     }
@@ -66,37 +66,19 @@ export function incrementCorrectCount(oldCount){
 export function incrementQuestionCount(oldCount){
   const incrementedCount = oldCount+1;
   return {
-    type: INCREMENT_QUESTION_COUNT,
+    type: INCREMENT_QUESTION_COUNT_THREE,
     payload: {
       questionCount: incrementedCount
     }
   }
 }
 
-export function changeColor(isInAnswerMode){
-  let redcolor=""
-  let greencolor=""
-  if(isInAnswerMode){
-    redcolor="red"
-    greencolor="green"
-  }
-  
-  return {
-    type: CHANGE_COLOR,
-    payload: {
-      redColor:redcolor,
-      greenColor:greencolor   
-    }
-  }
-}
-
-///////////GAME ONE//////////////
 export function gameOneToProps(dogsList, randomImageUrl, gamePicker){
   const correctAnswer = substractName(randomImageUrl);
   const allAnswers = answersNoRepeat(dogsList, correctAnswer);
   const shuffledAnswers = shuffleAnswers(allAnswers);
   return {
-    type: GAME_3,
+    type: GAME_THREE_DATA,
     payload: {
       dogs: [...dogsList],
       imageUrl: randomImageUrl,
@@ -109,7 +91,7 @@ export function gameOneToProps(dogsList, randomImageUrl, gamePicker){
 
 export function gameTwoToProps(dogsList, correctAnswer, shuffledAnswers, allImages, gamePicker){
   return {
-    type: GAME_3,
+    type: GAME_THREE_DATA,
     payload: {
       dogs: [...dogsList],
       correctAnswer: correctAnswer,
@@ -150,6 +132,23 @@ export function startGameThree(){
           });
           dispatch(gameTwoToProps(dogsList, correctAnswer, shuffledAnswers, allImages, gamePicker));
         })
+    }
+  }
+}
+
+export function changeColor(isInAnswerMode){
+  let redcolor=""
+  let greencolor=""
+  if(isInAnswerMode){
+    redcolor="red"
+    greencolor="green"
+  }
+  
+  return {
+    type: CHANGE_COLOR_THREE,
+    payload: {
+      redColor:redcolor,
+      greenColor:greencolor   
     }
   }
 }
