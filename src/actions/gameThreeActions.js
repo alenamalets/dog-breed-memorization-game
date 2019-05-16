@@ -3,8 +3,6 @@ export const GAME_3 = 'GAME_3';
 export const INCREMENT_CORRECT_COUNT = 'INCREMENT_CORRECT_COUNT';
 export const INCREMENT_QUESTION_COUNT = 'INCREMENT_QUESTION_COUNT';  
 export const CHANGE_COLOR = "CHANGE_COLOR"; 
-export const GAME_PICKER = "GAME_PICKER"; 
-
 
 function getCorrectName (dogList){
     const correctName = dogList[Math.floor(Math.random()*dogList.length)];
@@ -93,7 +91,7 @@ export function changeColor(isInAnswerMode){
 }
 
 ///////////GAME ONE//////////////
-export function gameOneToProps(dogsList, randomImageUrl){
+export function gameOneToProps(dogsList, randomImageUrl, gamePicker){
   const correctAnswer = substractName(randomImageUrl);
   const allAnswers = answersNoRepeat(dogsList, correctAnswer);
   const shuffledAnswers = shuffleAnswers(allAnswers);
@@ -103,68 +101,56 @@ export function gameOneToProps(dogsList, randomImageUrl){
       dogs: [...dogsList],
       imageUrl: randomImageUrl,
       correctAnswer: correctAnswer,
-      answers: shuffledAnswers
+      answers: shuffledAnswers,
+      gamePicker: gamePicker
     }
   }
 }
 
-export function startGameOne(){
-   return function (dispatch, getState){  
-    request('https://dog.ceo/api/breeds/image/random')
-      .then(response => {
-        const dogsList = getState().dogsList;
-        dispatch(gameOneToProps(dogsList, response.body.message))
-      })
-  }
-}
-
-////////////GAME TWO//////////////
-export function startGameTwo(){
-  return function (dispatch, getState){  
-    const dogsList = getState().dogsList;
-    const correctAnswer = getCorrectName(dogsList);
-    const allAnswers = answersNoRepeat(dogsList, correctAnswer);
-    const shuffledAnswers = shuffleAnswers(allAnswers);
-
-    const allRequests = shuffledAnswers.map(answer => {
-      return request(`https://dog.ceo/api/breed/${encodeURI(answer)}/images`);
-    });
-
-    Promise
-      .all(allRequests)
-      .then(responses => {
-        const allImages = responses.map(response => {
-          return pickRandomImgUrl(response.body.message);
-        });
-        dispatch(gameTwoToProps(dogsList, correctAnswer, shuffledAnswers, allImages));
-      })
-  }
-}
-
-export function gameTwoToProps(dogsList, correctAnswer, shuffledAnswers, allImages){
+export function gameTwoToProps(dogsList, correctAnswer, shuffledAnswers, allImages, gamePicker){
   return {
     type: GAME_3,
     payload: {
       dogs: [...dogsList],
       correctAnswer: correctAnswer,
       answers: shuffledAnswers,
-      images: allImages
+      images: allImages,
+      gamePicker: gamePicker
     }
   }
 }
 
 export function startGameThree(){
  const gamePicker = Math.floor(Math.random()*2);
-  if(gamePicker){
-    startGameOne();
+ console.log(gamePicker);
+  if(gamePicker === 0){
+    return function (dispatch, getState){  
+      request('https://dog.ceo/api/breeds/image/random')
+        .then(response => {
+          const dogsList = getState().dogsList;
+          dispatch(gameOneToProps(dogsList, response.body.message, gamePicker));  
+        })
+    }
   }
   else{
-    startGameTwo();
-  }
-  return {
-    type: GAME_PICKER,
-    payload: {
-      gamePicker: gamePicker
+    return function (dispatch, getState){  
+      const dogsList = getState().dogsList;
+      const correctAnswer = getCorrectName(dogsList);
+      const allAnswers = answersNoRepeat(dogsList, correctAnswer);
+      const shuffledAnswers = shuffleAnswers(allAnswers);
+  
+      const allRequests = shuffledAnswers.map(answer => {
+        return request(`https://dog.ceo/api/breed/${encodeURI(answer)}/images`);
+      });
+  
+      Promise
+        .all(allRequests)
+        .then(responses => {
+          const allImages = responses.map(response => {
+            return pickRandomImgUrl(response.body.message);
+          });
+          dispatch(gameTwoToProps(dogsList, correctAnswer, shuffledAnswers, allImages, gamePicker));
+        })
     }
   }
 }

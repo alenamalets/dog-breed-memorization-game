@@ -67,7 +67,6 @@ const Random=0;
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.game3reducer.gamePicker)
   return {
   ...state.game3reducer
   }

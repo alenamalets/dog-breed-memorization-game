@@ -1,9 +1,9 @@
 
 import {GAME_3,
-        GAME_PICKER,
         INCREMENT_CORRECT_COUNT,
         INCREMENT_QUESTION_COUNT ,
-        CHANGE_COLOR} from '../actions/gameTwoActions'
+        CHANGE_COLOR
+} from '../actions/gameThreeActions'
 
 const initialState = {
     answers: [],
@@ -22,9 +22,6 @@ const  game3reducer= (state = initialState, action = {}) => {
         
         case GAME_3:  
             return {...state, ...action.payload}
-
-         case GAME_PICKER:  
-            return {...state, ...action.payload}    
 
         case INCREMENT_CORRECT_COUNT:
 
