@@ -1,8 +1,11 @@
 import * as request from 'superagent';
 import {answersNoRepeat} from './gameOneActions'
+import {shuffleAnswers} from './gameOneActions'
 export const GAME_2 = 'GAME_2';
 export const INCREMENT_CORRECT_COUNT = 'INCREMENT_CORRECT_COUNT';
-export const INCREMENT_QUESTION_COUNT = 'INCREMENT_QUESTION_COUNT';   
+export const INCREMENT_QUESTION_COUNT = 'INCREMENT_QUESTION_COUNT'; 
+export const CHANGE_COLOR = 'CHANGE_COLOR';  
+
 
 function getCorrectName (dogList){
     const correctName = dogList[Math.floor(Math.random()*dogList.length)];
@@ -13,22 +16,6 @@ const pickRandomImgUrl = (images) => {
   const randomNumber = Math.floor(Math.random() * images.length);
   return images[randomNumber];
 }
-
-const shuffleAnswers = (array) => {
-  let currentIndex = array.length;
-  let temporaryValue, randomIndex;
-
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
-};
 
 export function getRandomImage(){
   return function (dispatch, getState){  
@@ -82,4 +69,24 @@ export function incrementQuestionCount(oldCount){
       questionCount: incrementedCount
     }
   }
+}
+
+export function changeColor(isInAnswerMode){
+
+  let redcolor=""
+  let greencolor=""
+  if(isInAnswerMode){
+    redcolor="redcolor"
+    greencolor="greencolor"
+  }
+  
+     
+  return {
+    type: CHANGE_COLOR,
+    payload: {
+      redColor:redcolor,
+      greenColor:greencolor   
+    }
+  }
+
 }
