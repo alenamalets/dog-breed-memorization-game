@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 
+import {
+  startGameThree, incrementCorrectCount, incrementQuestionCount, changeColor
+} from '../actions/gameThreeActions'
+import { connect } from 'react-redux';
+import './GameOne.css'
 
 
-let  Random=0;
-
-export default class Game3 extends Component {
+const Random=0;
+ class GameThree extends Component {
 
   componentDidMount(){
-    
+    this.props.startGameThree();
   }
 
  
@@ -20,14 +24,14 @@ export default class Game3 extends Component {
       if(value === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
         this.props.incrementQuestionCount(this.props.questionCount);
-        this.props.getRandomImage();
+        this.props.startGameThree();
       } else {
 
       
         this.props.changeColor(true);
 
         setTimeout(()=> {
-          this.props.getRandomImage();
+          this.props.startGameThree();
           this.props.changeColor(false);
           this.props.incrementQuestionCount(this.props.questionCount);
 
@@ -47,19 +51,27 @@ export default class Game3 extends Component {
       }
     }
   }
-
-
-
-
-
-
   render() {
 
     return (
       <div>
         <h1>I'm a game 3</h1>
+        {this.props.gamePicker===0?
+          <p>Game1</p>:
+          <p>Game2</p>
+      }
    
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+  ...state.game3reducer
+  }
+}
+
+export default connect(mapStateToProps, { 
+  startGameThree, incrementCorrectCount, incrementQuestionCount,changeColor
+})(GameThree);

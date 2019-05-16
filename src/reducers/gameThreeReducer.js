@@ -1,9 +1,9 @@
 
 import {GAME_3,
-        GAME_PICKER,
         INCREMENT_CORRECT_COUNT,
         INCREMENT_QUESTION_COUNT ,
-        CHANGE_COLOR} from '../actions/gameTwoActions'
+        CHANGE_COLOR
+} from '../actions/gameThreeActions'
 
 const initialState = {
     answers: [],
@@ -12,19 +12,16 @@ const initialState = {
     questionCount: 1,
     redColor:"",
     greenColor:"",
-    randomNumber:0
+    gamePicker:0
    
 }
 
-const reducer = (state = initialState, action = {}) => {
+const  game3reducer= (state = initialState, action = {}) => {
 
     switch (action.type) {
         
         case GAME_3:  
             return {...state, ...action.payload}
-
-         case GAME_PICKER:  
-            return {...state, ...action.payload}    
 
         case INCREMENT_CORRECT_COUNT:
 
@@ -43,4 +40,4 @@ const reducer = (state = initialState, action = {}) => {
     }
 }
 
-export default reducer
+export default game3reducer
