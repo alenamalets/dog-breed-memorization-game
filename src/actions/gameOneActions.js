@@ -28,7 +28,7 @@ export const answersNoRepeat = (dogsList, correctAnswer) => {
   return answers;
 }
 
-const shuffleAnswers = (array) => {
+export const shuffleAnswers = (array) => {
   let currentIndex = array.length;
   let temporaryValue, randomIndex;
 

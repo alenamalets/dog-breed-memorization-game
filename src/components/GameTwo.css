@@ -1,0 +1,17 @@
+.greencolor{
+    border: 5px solid green
+}
+.redcolor{
+    border: 5px solid red
+}
+#myProgress {
+    background-color: #ddd;
+  }
+  
+  #myBar {
+    height: 30px;
+    background-color: #4CAF50;
+  }
+  img {
+      width: 20vw;
+  }
