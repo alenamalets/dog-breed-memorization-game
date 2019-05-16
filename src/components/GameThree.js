@@ -91,7 +91,7 @@ const amountOfQuestions = 10;
 
 
 
-             <img className="game2-pic" {(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor2:this.props.redColor2}
+             <img className={`game2-pic ${(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor2:this.props.redColor2}`}
               data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
 
              
