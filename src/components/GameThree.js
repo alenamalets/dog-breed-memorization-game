@@ -23,19 +23,15 @@ import './GameOne.css'
         this.props.incrementQuestionCount(this.props.questionCount);
         this.props.startGameThree();
       } else {
-
-      
         this.props.changeColor(true);
-
         setTimeout(()=> {
           this.props.startGameThree();
           this.props.changeColor(false);
           this.props.incrementQuestionCount(this.props.questionCount);
-
         }, 2000);
       }
     }else {
-      if(event.target.value === this.props.correctAnswer){
+      if(value === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
         setTimeout(()=> {
           alert('game has finished')
@@ -44,7 +40,6 @@ import './GameOne.css'
         setTimeout(()=> {
           alert('game has finished')
         }, 2000);
-       
       }
     }
   }
