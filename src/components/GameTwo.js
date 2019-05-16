@@ -76,6 +76,7 @@ import "./GameTwo.css"
            
          
         } 
+        <div>{this.props.correctCount*20}%</div>
         <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
           <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
         </div>
