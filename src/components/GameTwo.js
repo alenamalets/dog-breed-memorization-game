@@ -36,30 +36,25 @@ import "./GameOne.css"
           alert('game has finished')
         }, 2000);
       }
-    }
-
-
-
-   
+    }  
 
   }
 
   render() {
     
     return (
-      <div>
-             
+      <div>            
         
           {this.props.images.length === 0 ?
             <p>loading...</p> : 
-            <p>                     
+            <p>                
 
              <b>{this.props.correctAnswer.toUpperCase()} </b>
              <p>Question: {this.props.questionCount} /5</p>
              <br></br>             
              {this.props.images.map((url,index) =>
-
-             <img width={120} height={300} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+ 
+             <img className="game2-pic" data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
              
              )}
              

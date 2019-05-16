@@ -87,7 +87,7 @@ const Random=0;
              <br></br>             
              {this.props.images.map((url,index) =>
 
-             <img width={120} height={300} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+             <img className="game2-pic" data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
              
              )}
 

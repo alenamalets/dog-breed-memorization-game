@@ -10,11 +10,11 @@ class DogDetails extends Component{
   render(){  
     return (
       <div>
-        <h3>{this.props.match.params.name}</h3> 
+        <h3>{this.props.match.params.name.toUpperCase()}</h3> 
         {this.props.Images.slice(0, 10).map((url,index) => 
-          <p key={index}>
-            <img src={url} width={200} alt={index}></img>
-          </p>  
+        
+            <img key={index} className="dog-pic" src={url} width={200} alt={index}></img>
+      
         )}        
       </div>
     );

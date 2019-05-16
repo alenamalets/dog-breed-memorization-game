@@ -8,13 +8,13 @@ export default class Nav extends Component{
         return (
             <div>
                <div id="logo" > <img src={logo}/> </div>
-                <div className="nav" > 
-                    <h1>WHAT THE DOG?</h1>               
+               <h1>WHAT THE DOG?</h1> 
+                <p className="nav" > 
                     <span><Link to="/">game 1</Link></span>  
                     <span><Link to="/game2">game 2</Link></span>   
                     <span><Link to="/game3">game 3</Link></span>   
                     <span><Link to="/doglist">dog list</Link></span>              
-                </div>
+                </p>
             </div>
         );
     }
