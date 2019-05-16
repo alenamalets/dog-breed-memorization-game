@@ -57,7 +57,7 @@ const Random=0;
       <div>
         <h1>I'm a game 3</h1>
         {this.props.gamePicker===0?
-          <p>
+          <div>
                <p>Question: {this.props.questionCount} /5</p>
               <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
               <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
@@ -78,9 +78,9 @@ const Random=0;
             );
           })}
               
-          </p>
+          </div>
           :
-          <p>
+          <div>
 
               <b>{this.props.correctAnswer.toUpperCase()} </b>
              <p>Question: {this.props.questionCount} /5</p>
@@ -96,7 +96,7 @@ const Random=0;
                <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
            </div>
             
-            </p>
+            </div>
       }
    
       </div>
