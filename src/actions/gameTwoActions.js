@@ -1,8 +1,10 @@
 import * as request from 'superagent';
 import {answersNoRepeat} from './gameOneActions'
-export const GAME_2 = 'GAME_2';
-export const INCREMENT_CORRECT_COUNT = 'INCREMENT_CORRECT_COUNT';
-export const INCREMENT_QUESTION_COUNT = 'INCREMENT_QUESTION_COUNT';   
+import {shuffleAnswers} from './gameOneActions'
+export const GAME_TWO_DATA = 'GAME_TWO_DATA';
+export const INCREMENT_CORRECT_COUNT_TWO = 'INCREMENT_CORRECT_COUNT_TWO';
+export const INCREMENT_QUESTION_COUNT_TWO = 'INCREMENT_QUESTION_COUNT_TWO'; 
+export const CHANGE_COLOR_TWO = 'CHANGE_COLOR_TWO';  
 
 function getCorrectName (dogList){
     const correctName = dogList[Math.floor(Math.random()*dogList.length)];
@@ -13,22 +15,6 @@ const pickRandomImgUrl = (images) => {
   const randomNumber = Math.floor(Math.random() * images.length);
   return images[randomNumber];
 }
-
-const shuffleAnswers = (array) => {
-  let currentIndex = array.length;
-  let temporaryValue, randomIndex;
-
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
-};
 
 export function getRandomImage(){
   return function (dispatch, getState){  
@@ -54,7 +40,7 @@ export function getRandomImage(){
 
 export function setupQuestion(dogsList, correctAnswer, shuffledAnswers, allImages){
   return {
-    type: GAME_2,
+    type: GAME_TWO_DATA,
     payload: {
       dogs: [...dogsList],
       correctAnswer: correctAnswer,
@@ -67,7 +53,7 @@ export function setupQuestion(dogsList, correctAnswer, shuffledAnswers, allImage
 export function incrementCorrectCount(oldCount){
   const incrementedCount = oldCount+1;
   return {
-    type: INCREMENT_CORRECT_COUNT,
+    type: INCREMENT_CORRECT_COUNT_TWO,
     payload: {
       correctCount: incrementedCount
     }
@@ -77,9 +63,26 @@ export function incrementCorrectCount(oldCount){
 export function incrementQuestionCount(oldCount){
   const incrementedCount = oldCount+1;
   return {
-    type: INCREMENT_QUESTION_COUNT,
+    type: INCREMENT_QUESTION_COUNT_TWO,
     payload: {
       questionCount: incrementedCount
+    }
+  }
+}
+
+export function changeColor(isInAnswerMode){
+  let redcolor=""
+  let greencolor=""
+  if(isInAnswerMode){
+    redcolor="redcolor"
+    greencolor="greencolor"
+  }
+    
+  return {
+    type: CHANGE_COLOR_TWO,
+    payload: {
+      redColor:redcolor,
+      greenColor:greencolor   
     }
   }
 }

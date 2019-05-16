@@ -1,24 +1,29 @@
-import {GAME_2,INCREMENT_CORRECT_COUNT, INCREMENT_QUESTION_COUNT} from '../actions/gameTwoActions'
+import {
+    GAME_TWO_DATA,
+    INCREMENT_CORRECT_COUNT_TWO, 
+    INCREMENT_QUESTION_COUNT_TWO, 
+    CHANGE_COLOR_TWO
+} from '../actions/gameTwoActions'
 
 const initialState = {
     answers: [],
     images: [],
     correctCount: 0,
-    questionCount: 1
+    questionCount: 1,
+    redColor:"",
+    greenColor:""
 }
 
 const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
-        case GAME_2:  
+        case GAME_TWO_DATA:  
             return {...state, ...action.payload}
-
-        case INCREMENT_CORRECT_COUNT:
-
+        case INCREMENT_CORRECT_COUNT_TWO:
             return {...state, ...action.payload}
-
-        case INCREMENT_QUESTION_COUNT:        
+        case INCREMENT_QUESTION_COUNT_TWO:        
             return {...state, ...action.payload}
-              
+        case CHANGE_COLOR_TWO:
+            return {...state, ...action.payload};       
         default:
             return state
     }

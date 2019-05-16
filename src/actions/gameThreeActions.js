@@ -1,8 +1,8 @@
 import * as request from 'superagent';
-export const GAME_3 = 'GAME_3';
-export const INCREMENT_CORRECT_COUNT = 'INCREMENT_CORRECT_COUNT';
-export const INCREMENT_QUESTION_COUNT = 'INCREMENT_QUESTION_COUNT';  
-export const CHANGE_COLOR = "CHANGE_COLOR"; 
+export const GAME_THREE_DATA = 'GAME_THREE_DATA';
+export const INCREMENT_CORRECT_COUNT_THREE = 'INCREMENT_CORRECT_COUNT_THREE';
+export const INCREMENT_QUESTION_COUNT_THREE = 'INCREMENT_QUESTION_COUNT_THREE';  
+export const CHANGE_COLOR_THREE = "CHANGE_COLOR_THREE"; 
 
 function getCorrectName (dogList){
     const correctName = dogList[Math.floor(Math.random()*dogList.length)];
@@ -56,7 +56,7 @@ const shuffleAnswers = (array) => {
 export function incrementCorrectCount(oldCount){
   const incrementedCount = oldCount+1;
   return {
-    type: INCREMENT_CORRECT_COUNT,
+    type: INCREMENT_CORRECT_COUNT_THREE,
     payload: {
       correctCount: incrementedCount
     }
@@ -66,37 +66,45 @@ export function incrementCorrectCount(oldCount){
 export function incrementQuestionCount(oldCount){
   const incrementedCount = oldCount+1;
   return {
-    type: INCREMENT_QUESTION_COUNT,
+    type: INCREMENT_QUESTION_COUNT_THREE,
     payload: {
       questionCount: incrementedCount
     }
   }
 }
 
+
 export function changeColor(isInAnswerMode){
   let redcolor=""
   let greencolor=""
+  let redcolor2=""
+  let greencolor2=""
   if(isInAnswerMode){
     redcolor="red"
     greencolor="green"
+    redcolor2="redcolor"
+    greencolor2="greencolor" 
   }
   
   return {
-    type: CHANGE_COLOR,
+    type:  CHANGE_COLOR_THREE,
     payload: {
       redColor:redcolor,
-      greenColor:greencolor   
+      greenColor:greencolor,
+      redColor2:redcolor2,
+      greenColor2:greencolor2,
+      
     }
   }
 }
-
 ///////////GAME ONE//////////////
+
 export function gameOneToProps(dogsList, randomImageUrl, gamePicker){
   const correctAnswer = substractName(randomImageUrl);
   const allAnswers = answersNoRepeat(dogsList, correctAnswer);
   const shuffledAnswers = shuffleAnswers(allAnswers);
   return {
-    type: GAME_3,
+    type: GAME_THREE_DATA,
     payload: {
       dogs: [...dogsList],
       imageUrl: randomImageUrl,
@@ -109,7 +117,7 @@ export function gameOneToProps(dogsList, randomImageUrl, gamePicker){
 
 export function gameTwoToProps(dogsList, correctAnswer, shuffledAnswers, allImages, gamePicker){
   return {
-    type: GAME_3,
+    type: GAME_THREE_DATA,
     payload: {
       dogs: [...dogsList],
       correctAnswer: correctAnswer,
@@ -122,7 +130,6 @@ export function gameTwoToProps(dogsList, correctAnswer, shuffledAnswers, allImag
 
 export function startGameThree(){
  const gamePicker = Math.floor(Math.random()*2);
- console.log(gamePicker);
   if(gamePicker === 0){
     return function (dispatch, getState){  
       request('https://dog.ceo/api/breeds/image/random')
@@ -154,3 +161,4 @@ export function startGameThree(){
     }
   }
 }
+

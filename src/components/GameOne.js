@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {
-  getRandomImage, incrementCorrectCount, incrementQuestionCount, handleClick,changeColor
+  getRandomImage, incrementCorrectCount, incrementQuestionCount, changeColor
 } from '../actions/gameOneActions'
 import { connect } from 'react-redux';
 import './GameOne.css'
 
+const amountOfQuestions = 10;
 class GameOne extends Component {
   componentDidMount(){
     this.props.getRandomImage();
@@ -12,7 +13,7 @@ class GameOne extends Component {
   }
 
   handleChange = (event) => {
-    if(this.props.questionCount < 5){ 
+    if(this.props.questionCount < amountOfQuestions){ 
       if(event.target.value === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
         this.props.incrementQuestionCount(this.props.questionCount);
@@ -36,19 +37,24 @@ class GameOne extends Component {
           alert('game has finished')
         }, 1000)
       }else {
+        this.props.changeColor(true);
         setTimeout(()=> {
+          this.props.changeColor(false);
           alert('game has finished')
         }, 2000);
        
       }
     }
   }
+  newgame = () => {
+    window.location.reload();
+  }
 
   displayAnswers = () => {
     return this.props.answers.length === 0 ?
       <p>loading...</p> : 
-      
-      this.props.answers.map((answer, index) => {
+      <div>
+     {this.props.answers.map((answer, index) => {
         return (
           
           <div className="radio" key={index} >
@@ -58,19 +64,28 @@ class GameOne extends Component {
               <input type="radio" value={answer} id={answer} name="answer" 
               onChange={this.handleChange} />
             </label>  
-          </div>
+          </div> 
         );
-      });
+      })}
+      <br></br>
+      <button onClick={this.newgame}>START NEW GAME</button>
+      </div>
   }
 
   render() {
     return (
+
       <div className="progress" >
-        <p>Question: {this.props.questionCount} /5</p>
+        
+
+      <div>
+        <p>Question: {this.props.questionCount} /10</p>
+
         <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
+        <div>{this.props.correctCount*10}%</div>
         <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
-          <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
-        </div>
+          <div id="myBar" style={{ width: this.props.correctCount * 10 + '%'}}></div>
+        </div> 
         {this.displayAnswers()}
       </div>
     )
@@ -85,5 +100,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, { 
-  getRandomImage, incrementCorrectCount, incrementQuestionCount, handleClick ,changeColor
+  getRandomImage, incrementCorrectCount, incrementQuestionCount, changeColor
 })(GameOne);

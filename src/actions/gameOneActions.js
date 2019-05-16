@@ -1,9 +1,8 @@
 import * as request from 'superagent';
-export const SET_RANDOM_IMAGE = 'SET_RANDOM_IMAGE';
-export const INCREMENT_CORRECT_COUNT = 'INCREMENT_CORRECT_COUNT';
-export const INCREMENT_QUESTION_COUNT = 'INCREMENT_QUESTION_COUNT';
-export const CLICKED_ITEM = 'CLICKED_ITEM';
-export const CHANGE_COLOR = "CHANGE_COLOR"
+export const GAME_ONE_DATA = 'GAME_ONE_DATA';
+export const INCREMENT_CORRECT_COUNT_ONE = 'INCREMENT_CORRECT_COUNT_ONE';
+export const INCREMENT_QUESTION_COUNT_ONE = 'INCREMENT_QUESTION_COUNT_ONE';
+export const CHANGE_COLOR_ONE = "CHANGE_COLOR_ONE"
 
 const substractName = (name) => {
   name = decodeURIComponent(name);
@@ -28,15 +27,13 @@ export const answersNoRepeat = (dogsList, correctAnswer) => {
   return answers;
 }
 
-const shuffleAnswers = (array) => {
+export const shuffleAnswers = (array) => {
   let currentIndex = array.length;
   let temporaryValue, randomIndex;
 
   while (0 !== currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-
-    // And swap it with the current element.
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
@@ -49,9 +46,8 @@ export function setupQuestion(dogsList, randomImageUrl){
   const allAnswers = answersNoRepeat(dogsList, correctAnswer);
   const shuffledAnswers = shuffleAnswers(allAnswers);
   return {
-    type: SET_RANDOM_IMAGE,
+    type: GAME_ONE_DATA,
     payload: {
-      dogs: [...dogsList],
       imageUrl: randomImageUrl,
       correctAnswer: correctAnswer,
       answers: shuffledAnswers
@@ -72,53 +68,36 @@ export function getRandomImage(){
 export function incrementCorrectCount(oldCount){
   const incrementedCount = oldCount+1;
   return {
-    type: INCREMENT_CORRECT_COUNT,
+    type: INCREMENT_CORRECT_COUNT_ONE,
     payload: {
       correctCount: incrementedCount
     }
   }
 }
 
-
-export function changeColor(isInAnswerMode){
-
-  let redcolor=""
-  let greencolor=""
-  if(isInAnswerMode){
-    redcolor="red"
-    greencolor="green"
-  }
-  
-     
-  return {
-    type: CHANGE_COLOR,
-    payload: {
-      redColor:redcolor,
-      greenColor:greencolor   
-    }
-  }
-
-}
-
-
-
-
 export function incrementQuestionCount(oldCount){
   const incrementedCount = oldCount+1;
   return {
-    type: INCREMENT_QUESTION_COUNT,
+    type: INCREMENT_QUESTION_COUNT_ONE,
     payload: {
       questionCount: incrementedCount
     }
   }
 }
 
-export function handleClick(event){
-  const clickedItem = event.target.value;
+export function changeColor(isInAnswerMode){
+  let redcolor=""
+  let greencolor=""
+  if(isInAnswerMode){
+    redcolor="red"
+    greencolor="green"
+  }
+     
   return {
-    type: CLICKED_ITEM,
+    type: CHANGE_COLOR_ONE,
     payload: {
-      clicked: clickedItem
+      redColor:redcolor,
+      greenColor:greencolor   
     }
   }
 }
