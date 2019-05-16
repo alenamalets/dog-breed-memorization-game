@@ -122,7 +122,6 @@ export function gameTwoToProps(dogsList, correctAnswer, shuffledAnswers, allImag
 
 export function startGameThree(){
  const gamePicker = Math.floor(Math.random()*2);
- console.log(gamePicker);
   if(gamePicker === 0){
     return function (dispatch, getState){  
       request('https://dog.ceo/api/breeds/image/random')

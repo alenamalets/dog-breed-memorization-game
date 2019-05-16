@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import './GameOne.css'
 
 
-const Random=0;
  class GameThree extends Component {
 
   componentDidMount(){
@@ -16,9 +15,7 @@ const Random=0;
 
  
  handleChange = (event) => {
-
-   const value = (Random)? event.target.getAttribute('data-url') : event.target.value
-
+   const value = this.props.gamePicker === 0 ?  event.target.value : event.target.getAttribute('data-url');
     if(this.props.questionCount < 5){ 
 
       if(value === this.props.correctAnswer){
@@ -57,7 +54,7 @@ const Random=0;
       <div>
         <h1>I'm a game 3</h1>
         {this.props.gamePicker===0?
-          <p>
+          <div>
                <p>Question: {this.props.questionCount} /5</p>
               <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
               <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
@@ -76,13 +73,12 @@ const Random=0;
                 </label>  
               </div>
             );
-          })}
-              
-          </p>
+          })}   
+          </div>
           :
-          <p>
+          <div>
 
-              <b>{this.props.correctAnswer.toUpperCase()} </b>
+            <b>{this.props.correctAnswer.toUpperCase()} </b>
              <p>Question: {this.props.questionCount} /5</p>
              <br></br>             
              {this.props.images.map((url,index) =>
@@ -96,7 +92,7 @@ const Random=0;
                <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
            </div>
             
-            </p>
+          </div>
       }
    
       </div>
