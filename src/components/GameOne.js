@@ -36,7 +36,9 @@ class GameOne extends Component {
           alert('game has finished')
         }, 1000)
       }else {
+        this.props.changeColor(true);
         setTimeout(()=> {
+          this.props.changeColor(false);
           alert('game has finished')
         }, 2000);
        

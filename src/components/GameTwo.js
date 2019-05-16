@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import {getRandomImage,incrementCorrectCount, incrementQuestionCount} from '../actions/gameTwoActions'
-import "./GameOne.css"
+import {getRandomImage,incrementCorrectCount, incrementQuestionCount, changeColor} from '../actions/gameTwoActions'
+import "./GameTwo.css"
 
  class Game2 extends Component {
 
@@ -24,9 +24,10 @@ import "./GameOne.css"
         this.props.getRandomImage();
 
       } else {
-
+        this.props.changeColor(true);
         setTimeout(()=> {
           this.props.getRandomImage();
+          this.props.changeColor(false);
           this.props.incrementQuestionCount(this.props.questionCount);
         }, 2000);
 
@@ -36,7 +37,9 @@ import "./GameOne.css"
         this.props.incrementCorrectCount(this.props.correctCount);
         alert('game has finished')
       }else {
+        this.props.changeColor(true);
         setTimeout(()=> {
+          this.props.changeColor(false);
           alert('game has finished')
         }, 2000);
       }
@@ -63,7 +66,8 @@ import "./GameOne.css"
              <br></br>             
              {this.props.images.map((url,index) =>
 
-             <img width={120} height={300} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+             <img className={(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor:this.props.redColor}
+             width={120} height={300} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
              
              )}
              
@@ -83,8 +87,6 @@ import "./GameOne.css"
 
 
 const mapStateToProps = (state) => {
-  console.log("state",state.game2reducer.correctAnswer);
-  
   return {
    
     ...state.game2reducer
@@ -92,4 +94,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {getRandomImage, incrementCorrectCount, incrementQuestionCount})(Game2);
+export default connect(mapStateToProps, {getRandomImage, incrementCorrectCount, incrementQuestionCount, changeColor})(Game2);
