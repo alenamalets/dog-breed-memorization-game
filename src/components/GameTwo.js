@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {getRandomImage,incrementCorrectCount, incrementQuestionCount, changeColor} from '../actions/gameTwoActions'
 import "./GameTwo.css"
 
+const amountOfQuestions = 10;
  class Game2 extends Component {
 
   componentDidMount(){
@@ -12,7 +13,7 @@ import "./GameTwo.css"
   handleChange = (event) => {
 
 
-    if(this.props.questionCount < 5){      
+    if(this.props.questionCount < amountOfQuestions){      
 
       if(event.target.getAttribute('data-url') === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
@@ -39,31 +40,36 @@ import "./GameTwo.css"
           alert('game has finished')
         }, 2000);
       }
+
     }
+  }
 
-
-
-   
+  newgame = () => {
+    window.location.reload();
 
   }
 
   render() {
     
     return (
-      <div>
-             
+      <div>            
         
           {this.props.images.length === 0 ?
             <p>loading...</p> : 
-            <p>                     
+            <p>                
 
              <b>{this.props.correctAnswer.toUpperCase()} </b>
-             <p>Question: {this.props.questionCount} /5</p>
+             <p>Question: {this.props.questionCount} /10</p>
              <br></br>             
              {this.props.images.map((url,index) =>
 
-             <img className={(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor:this.props.redColor}
-             width={120} height={300} data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+ 
+             
+
+
+             <img className= {(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor:this.props.redColor}
+              data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
+
              
              )}
              
@@ -72,10 +78,12 @@ import "./GameTwo.css"
            
          
         } 
-        <div>{this.props.correctCount*20}%</div>
+        <div>{this.props.correctCount*10}%</div>
         <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
-          <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
+          <div id="myBar" style={{ width: this.props.correctCount * 10 + '%'}}></div>
         </div>
+        <br></br>
+        <button onClick={this.newgame}>START NEW GAME</button>
       </div>
     )
   }

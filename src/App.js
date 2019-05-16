@@ -3,12 +3,15 @@ import { Route } from 'react-router-dom'
 import Nav from "./components/Nav"
 import DogList from "./components/DogList"
 import DogDetails from "./components/DogDetails"
-import './App.css';
 import GameOne from './components/GameOne';
 import GameTwo from './components/GameTwo';
 import GameThree from './components/GameThree';
 import { connect } from 'react-redux';
 import { getDogs } from './actions/dogListActions';
+
+
+import './App.css';
+import './components/assets/css/master.css'
 
 class App extends Component{
   componentDidMount(){
@@ -17,7 +20,7 @@ class App extends Component{
 
   render(){
     return (
-    <div className="App" >
+    <div className="container" >
       {
         this.props.dogs.length === 0 ? <p>loading...</p> : 
         <>
