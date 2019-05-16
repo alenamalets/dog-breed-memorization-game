@@ -87,7 +87,7 @@ export function changeColor(isInAnswerMode){
   }
   
   return {
-    type: CHANGE_COLOR,
+    type:  CHANGE_COLOR_THREE,
     payload: {
       redColor:redcolor,
       greenColor:greencolor,
@@ -162,19 +162,3 @@ export function startGameThree(){
   }
 }
 
-export function changeColor(isInAnswerMode){
-  let redcolor=""
-  let greencolor=""
-  if(isInAnswerMode){
-    redcolor="red"
-    greencolor="green"
-  }
-  
-  return {
-    type: CHANGE_COLOR_THREE,
-    payload: {
-      redColor:redcolor,
-      greenColor:greencolor   
-    }
-  }
-}
