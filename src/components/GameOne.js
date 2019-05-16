@@ -46,12 +46,15 @@ class GameOne extends Component {
       }
     }
   }
+  newgame = () => {
+    window.location.reload();
+  }
 
   displayAnswers = () => {
     return this.props.answers.length === 0 ?
       <p>loading...</p> : 
-      
-      this.props.answers.map((answer, index) => {
+      <div>
+     {this.props.answers.map((answer, index) => {
         return (
           
           <div className="radio" key={index} >
@@ -61,9 +64,12 @@ class GameOne extends Component {
               <input type="radio" value={answer} id={answer} name="answer" 
               onChange={this.handleChange} />
             </label>  
-          </div>
+          </div> 
         );
-      });
+      })}
+      <br></br>
+      <button onClick={this.newgame}>START NEW GAME</button>
+      </div>
   }
 
   render() {
