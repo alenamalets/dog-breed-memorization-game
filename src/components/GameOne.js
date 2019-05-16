@@ -70,9 +70,10 @@ class GameOne extends Component {
       <div>
         <p>Question: {this.props.questionCount} /5</p>
         <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
+        <div>{this.props.correctCount*20}%</div>
         <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
           <div id="myBar" style={{ width: this.props.correctCount * 20 + '%'}}></div>
-        </div>
+        </div> 
         {this.displayAnswers()}
       </div>
     )
