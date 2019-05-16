@@ -45,6 +45,9 @@ const amountOfQuestions = 10;
       }
     }
   }
+  newgame = () => {
+    window.location.reload();
+  }
   render() {
 
     return (
@@ -93,7 +96,8 @@ const amountOfQuestions = 10;
             
           </div>
 
-}
+}         <br></br>
+          <button onClick={this.newgame}>START NEW GAME</button>
    
       </div>
     )

@@ -41,11 +41,10 @@ const amountOfQuestions = 10;
         }, 2000);
       }
     }
+  }
 
-
-
-   
-
+  newgame = () => {
+    window.location.reload();
   }
 
   render() {
@@ -77,6 +76,8 @@ const amountOfQuestions = 10;
         <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
           <div id="myBar" style={{ width: this.props.correctCount * 10 + '%'}}></div>
         </div>
+        <br></br>
+        <button onClick={this.newgame}>START NEW GAME</button>
       </div>
     )
   }
