@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-
-import {
-  startGameThree, incrementCorrectCount, incrementQuestionCount, changeColor
-} from '../actions/gameThreeActions'
 import { connect } from 'react-redux';
+import {
+  startGameThree, 
+  incrementCorrectCount, 
+  incrementQuestionCount, 
+  changeColor,
+  restartGame
+} from '../actions/gameThreeActions'
 import './GameThree.css'
 
 const amountOfQuestions = 10;
- class GameThree extends Component {
+class GameThree extends Component {
 
   componentDidMount(){
     this.props.startGameThree();
@@ -45,9 +48,7 @@ const amountOfQuestions = 10;
       }
     }
   }
-  newgame = () => {
-    window.location.reload();
-  }
+  
   render() {
 
     return (
@@ -106,7 +107,7 @@ const amountOfQuestions = 10;
           </div>
 
 }         <br></br>
-          <button onClick={this.newgame}>START NEW GAME</button>
+          <button onClick={this.props.restartGame}>START NEW GAME</button>
 
    
       </div>
@@ -116,10 +117,14 @@ const amountOfQuestions = 10;
 
 const mapStateToProps = (state) => {
   return {
-  ...state.game3reducer
+    ...state.game3reducer
   }
 }
 
 export default connect(mapStateToProps, { 
-  startGameThree, incrementCorrectCount, incrementQuestionCount,changeColor
+  startGameThree, 
+  incrementCorrectCount, 
+  incrementQuestionCount,
+  changeColor,
+  restartGame
 })(GameThree);
