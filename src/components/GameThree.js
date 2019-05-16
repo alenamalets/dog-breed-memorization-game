@@ -59,7 +59,7 @@ const amountOfQuestions = 10;
 
                <p>Question: {this.props.questionCount} /10</p>
 
-              <img style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
+              <img className="dog-pic" style={{width: '30%', margin: '0 auto'}} src={this.props.imageUrl} alt={this.props.correctAnswer} />
               <div>{this.props.correctCount*10}%</div>
               <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
                 <div id="myBar" style={{ width: this.props.correctCount * 10 + '%'}}></div>
