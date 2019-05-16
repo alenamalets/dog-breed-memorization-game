@@ -12,13 +12,9 @@ import "./GameOne.css"
   handleChange = (event) => {
 
 
-
-    if(this.props.questionCount < 5){
-
-      
+    if(this.props.questionCount < 5){      
 
       if(event.target.getAttribute('data-url') === this.props.correctAnswer){
-
         this.props.incrementCorrectCount(this.props.correctCount);
         this.props.incrementQuestionCount(this.props.questionCount);
         this.props.getRandomImage();
