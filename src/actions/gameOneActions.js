@@ -90,7 +90,9 @@ export function handleClick(event){
             gameIsFinished: true
           }
         })
-        alert('game has finished')
+        setTimeout(() => {
+          alert('game has finished');
+        }, 1000)
         return false;
       }
 
