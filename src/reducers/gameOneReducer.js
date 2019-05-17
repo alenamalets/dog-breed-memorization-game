@@ -14,7 +14,8 @@ const initialState = {
     questionCount: 1,
     redColor:"",
     greenColor:"", 
-    simulateClick: []   
+    simulateClick: [],
+    gameIsFinished: false   
 }
 
 const reducer = (state = initialState, action = {}) => {
