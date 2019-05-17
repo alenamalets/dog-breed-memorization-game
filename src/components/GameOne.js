@@ -70,7 +70,7 @@ class GameOne extends Component {
             this.props.handleClick({ target: { value: this.props.answers[2] }})
           }}
         />
-       
+          <p><b>Сhoose the correct breed name</b></p>
           <p>Question: {this.props.questionCount} / {amountOfQuestions}</p>
 
           <img className="dog-pic" src={this.props.imageUrl} alt={this.props.correctAnswer} />
