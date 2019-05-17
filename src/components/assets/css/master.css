@@ -64,3 +64,11 @@ ul{list-style: none;}
     width: 150px;
     height: 180px; 
 }
+button{   
+    background: #ff8d00;
+    padding: 10px;
+    border: 1px solid #ff8d00;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;   
+}
