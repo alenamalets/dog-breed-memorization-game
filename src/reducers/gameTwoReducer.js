@@ -2,7 +2,8 @@ import {
     GAME_TWO_DATA,
     INCREMENT_CORRECT_COUNT_TWO, 
     INCREMENT_QUESTION_COUNT_TWO, 
-    CHANGE_COLOR_TWO
+    CHANGE_COLOR_TWO,
+    RESTART_GAME_TWO
 } from '../actions/gameTwoActions'
 
 const initialState = {
@@ -23,10 +24,12 @@ const reducer = (state = initialState, action = {}) => {
         case INCREMENT_QUESTION_COUNT_TWO:        
             return {...state, ...action.payload}
         case CHANGE_COLOR_TWO:
-            return {...state, ...action.payload};       
+            return {...state, ...action.payload};   
+        case RESTART_GAME_TWO:
+            return initialState;    
         default:
-            return state
+            return state;
     }
 }
 
-export default reducer
+export default reducer;

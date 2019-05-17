@@ -1,16 +1,15 @@
 import { combineReducers } from 'redux'
+import gameOneReducer from './gameOneReducer'
+import gameTwoReducer from './gameTwoReducer'
+import gameThreeReducer from './gameThreeReducer'
 import dogsList from './dogListReducer'
-import randomImage from './gameOneReducer'
 import dogImages from './dogDetailsReducer'
-import game2reducer from './gameTwoReducer'
-import game3reducer from './gameThreeReducer'
 
 
 export default combineReducers({
+  gameOneReducer,
+  gameTwoReducer,
+  gameThreeReducer,
   dogsList,
-  randomImage,
-  dogImages,
-  game2reducer,
-  game3reducer
-
+  dogImages
 })

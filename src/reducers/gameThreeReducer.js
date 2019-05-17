@@ -2,7 +2,8 @@ import {
     GAME_THREE_DATA,
     INCREMENT_CORRECT_COUNT_THREE,
     INCREMENT_QUESTION_COUNT_THREE,
-    CHANGE_COLOR_THREE
+    CHANGE_COLOR_THREE,
+    RESTART_GAME_THREE
 } from '../actions/gameThreeActions'
 
 const initialState = {
@@ -24,10 +25,12 @@ const reducer = (state = initialState, action = {}) => {
         case INCREMENT_QUESTION_COUNT_THREE: 
             return {...state, ...action.payload}
         case CHANGE_COLOR_THREE:
-            return {...state, ...action.payload};                
+            return {...state, ...action.payload};  
+        case RESTART_GAME_THREE:
+            return initialState;              
         default:
-            return state
+            return state;
     }
 }
 
-export default reducer
+export default reducer;
