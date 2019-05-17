@@ -15,7 +15,6 @@ class GameOne extends Component {
 
   componentDidMount() {
     this.props.setupQuestionGameOne();
-    console.log(this.props.isInAnswerMode);
   }
 
   handleChange = (event) => {
