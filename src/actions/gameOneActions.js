@@ -10,6 +10,7 @@ export const INCREMENT_CORRECT_COUNT_ONE = 'INCREMENT_CORRECT_COUNT_ONE';
 export const INCREMENT_QUESTION_COUNT_ONE = 'INCREMENT_QUESTION_COUNT_ONE';
 export const CHANGE_COLOR_ONE = "CHANGE_COLOR_ONE";
 export const RESTART_GAME_ONE = "RESTART_GAME_ONE";  
+export const SIMULATE_CLICK = "SIMULATE_CLICK";
 
 export function setupQuestionGameOne(){
   return function (dispatch, getState){  
@@ -30,7 +31,7 @@ function sendGameOneDataToState(dogsList, randomImageUrl){
     payload: {
       imageUrl: randomImageUrl,
       correctAnswer: correctAnswer,
-      answers: shuffledAnswers
+      answers: shuffledAnswers,
     }
   }
 }
@@ -67,6 +68,95 @@ export function changeColor(isInAnswerMode){
     payload: {
       redColor:redcolor,
       greenColor:greencolor   
+    }
+  }
+}
+
+export function handleClick(event){
+  const givenAnswer = event.target.value;
+
+  return function(dispatch, getState){
+    const gameOneState = getState().gameOneReducer;
+    if(gameOneState.gameIsFinished){
+      return false;
+    }
+
+    if(givenAnswer === gameOneState.correctAnswer){
+      if(gameOneState.questionCount > 4){
+        dispatch({
+          type: GAME_ONE_DATA,
+          payload: {
+            correctCount: gameOneState.correctCount + 1,
+            gameIsFinished: true
+          }
+        })
+        setTimeout(() => {
+          alert('game has finished');
+        }, 1000)
+        return false;
+      }
+
+      dispatch({
+        type: GAME_ONE_DATA,
+        payload: {
+          correctCount: gameOneState.correctCount + 1,
+          questionCount: gameOneState.questionCount + 1,
+          givenAnswer: '',
+          simulateClick: [],
+        }
+      })
+      dispatch(setupQuestionGameOne());
+    }
+    else {
+      if(gameOneState.questionCount > 4){
+        dispatch({
+          type: GAME_ONE_DATA,
+          payload: {
+            givenAnswer: givenAnswer
+          }
+        })
+        setTimeout(() => {
+          dispatch({
+            type: GAME_ONE_DATA,
+            payload: {
+              gameIsFinished: true
+            }
+          })
+          alert('game has finished')
+        }, 2000);
+        return false;
+      }
+
+      dispatch({
+        type: GAME_ONE_DATA,
+        payload: {
+          givenAnswer: givenAnswer,
+        }
+      })
+      setTimeout(() => {
+        dispatch({
+          type: GAME_ONE_DATA,
+          payload: {
+            questionCount: gameOneState.questionCount + 1,
+            givenAnswer: '',
+            simulateClick: [],
+          }
+        })
+        dispatch(setupQuestionGameOne());
+      }, 2000);
+    }
+  }
+}
+
+export function handleKeyPress(event){
+  const keyOptions = [1,2,3];
+  const simulateClick = keyOptions.map((keyOption) => {
+    return parseInt(event.key) === keyOption;
+  })
+  return {
+    type: SIMULATE_CLICK,
+    payload: {
+      simulateClick: simulateClick
     }
   }
 }

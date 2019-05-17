@@ -3,15 +3,19 @@ import {
     INCREMENT_CORRECT_COUNT_ONE, 
     INCREMENT_QUESTION_COUNT_ONE, 
     CHANGE_COLOR_ONE,
-    RESTART_GAME_ONE
+    RESTART_GAME_ONE,
+    SIMULATE_CLICK
 } from '../actions/gameOneActions';
 
 const initialState = {
     answers: [],
+    givenAnswer: "",
     correctCount: 0,
     questionCount: 1,
     redColor:"",
-    greenColor:"",    
+    greenColor:"", 
+    simulateClick: [],
+    gameIsFinished: false   
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -24,6 +28,8 @@ const reducer = (state = initialState, action = {}) => {
             return {...state, ...action.payload};
         case CHANGE_COLOR_ONE:
             return {...state, ...action.payload};   
+        case SIMULATE_CLICK:
+            return {...state, ...action.payload}
         case RESTART_GAME_ONE: 
             return initialState;
         default:

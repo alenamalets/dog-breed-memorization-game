@@ -35,7 +35,7 @@ class GameTwo extends Component {
     } 
     
     else {
-      if(event.target.value === this.props.correctAnswer){
+      if(event.target.getAttribute('data-url') === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
         setTimeout(() => {
           alert('GAME HAS FINISHED')

@@ -5,9 +5,12 @@ import {
   incrementCorrectCount,
   incrementQuestionCount,
   changeColor,
-  restartGame
+  restartGame,
+  handleClick,
+  handleKeyPress
 } from '../actions/gameOneActions'
 import './GameOne.css'
+import KeyHandler, { KEYPRESS } from 'react-key-handler';
 
 const amountOfQuestions = 5;
 
@@ -17,51 +20,18 @@ class GameOne extends Component {
     this.props.setupQuestionGameOne();
   }
 
-  handleChange = (event) => {
-
-    if (this.props.questionCount < amountOfQuestions) {
-      if (event.target.value === this.props.correctAnswer) {
-        this.props.incrementCorrectCount(this.props.correctCount);
-        this.props.incrementQuestionCount(this.props.questionCount);
-        this.props.setupQuestionGameOne();
-      } 
-      else {
-        this.props.changeColor(true);
-        setTimeout(() => {
-          this.props.setupQuestionGameOne();
-          this.props.changeColor(false);
-          this.props.incrementQuestionCount(this.props.questionCount);
-        }, 2000);
-      }
-    } 
-
-    else {
-      if (event.target.value === this.props.correctAnswer) {
-        this.props.incrementCorrectCount(this.props.correctCount);
-        setTimeout(() => {
-          alert('GAME HAS FINISHED')
-        }, 1000)
-      } 
-      else {
-        this.props.changeColor(true);
-        setTimeout(() => {
-          this.props.changeColor(false);
-          alert('GAME HAS FINISHED')
-        }, 2000);
-      }
-    }
-  }
-
   displayAnswers = () => {
     return (
       <div>
         {this.props.answers.map((answer, index) => {
           return (
             <div className="radio" key={index} >
-              <label key={answer} className={(answer === this.props.correctAnswer) ? this.props.greenColor : this.props.redColor}>
+                <label key={answer} className={
+                  this.props.givenAnswer ? answer === this.props.correctAnswer ? 'green' : 'red' : ''
+                }>
                 {answer}
                 <input type="radio" value={answer} id={answer} name="answer"
-                  onChange={this.handleChange} />
+                  onChange={this.props.handleClick} checked={this.props.simulateClick[index]} />
               </label>
             </div>
           );
@@ -75,17 +45,40 @@ class GameOne extends Component {
   render() {
     return (
       this.props.answers.length === 0 ? <p>loading...</p> :
-        <div className="progress" >
-          <div>
-            <p><b>Сhoose the correct breed name</b></p>
-            <p>Question: {this.props.questionCount} / {amountOfQuestions}</p>
-            <img className="dog-pic" src={this.props.imageUrl} alt={this.props.correctAnswer} />
-            <div>{this.props.correctCount * 20}%</div>
-            <div id="myProgress" style={{ width: '30%', margin: '0 auto' }}>
-              <div id="myBar" style={{ width: this.props.correctCount * 20 + '%' }}></div>
-            </div>
-            {this.displayAnswers()}
+      <div className="progress">
+        <KeyHandler
+          keyEventName={KEYPRESS}
+          keyValue="1"
+          onKeyHandle={event => {
+            this.props.handleKeyPress(event)
+            this.props.handleClick({ target: { value: this.props.answers[0] }})
+          }}
+        />
+        <KeyHandler
+          keyEventName={KEYPRESS}
+          keyValue="2"
+          onKeyHandle={event => {
+            this.props.handleKeyPress(event)
+            this.props.handleClick({ target: { value: this.props.answers[1] }})
+          }}
+        />
+        <KeyHandler
+          keyEventName={KEYPRESS}
+          keyValue="3"
+          onKeyHandle={event => {
+            this.props.handleKeyPress(event)
+            this.props.handleClick({ target: { value: this.props.answers[2] }})
+          }}
+        />
+       
+          <p>Question: {this.props.questionCount} / {amountOfQuestions}</p>
+
+          <img className="dog-pic" src={this.props.imageUrl} alt={this.props.correctAnswer} />
+          <div>{this.props.correctCount * 20}%</div>
+          <div id="myProgress" style={{ width: '30%', margin: '0 auto' }}>
+            <div id="myBar" style={{ width: this.props.correctCount * 20 + '%' }}></div>
           </div>
+          {this.displayAnswers()}
         </div>
     )
   }
@@ -98,9 +91,11 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-  setupQuestionGameOne,
-  incrementCorrectCount,
-  incrementQuestionCount,
-  changeColor,
-  restartGame
+  setupQuestionGameOne, 
+  incrementCorrectCount, 
+  incrementQuestionCount, 
+  changeColor, 
+  restartGame,
+  handleClick,
+  handleKeyPress
 })(GameOne);
