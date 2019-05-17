@@ -22,6 +22,11 @@ export function setupQuestionGameThree(){
           const dogsList = getState().dogsList;
           dispatch(sendGameOneDataToState(dogsList, response.body.message, gamePicker));  
         })
+        .catch(error =>
+          console.log("errors",error.message)
+        // errors.map(error =>{ return   console.log("strat error",error.message,"finish")} ) 
+       
+        )
     }
   }
   else{
@@ -40,7 +45,12 @@ export function setupQuestionGameThree(){
         .then(responses => {
           const allImages = responses.map(response => {
             return getRandomImageFromImageList(response.body.message);
-          });
+          })
+          .catch(errors =>
+            console.log("errors",errors)         
+         
+          )
+          ;
           dispatch(sendGameTwoDataToState(correctAnswer, shuffledAnswers, allImages, gamePicker));
         })
     }

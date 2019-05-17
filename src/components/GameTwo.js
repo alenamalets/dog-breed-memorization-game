@@ -78,6 +78,7 @@ class GameTwo extends Component {
 }
 
 const mapStateToProps = (state) => {
+  
   return {
     ...state.gameTwoReducer
   }
