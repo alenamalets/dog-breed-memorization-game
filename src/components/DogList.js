@@ -16,8 +16,7 @@ class DogList extends Component {
             })
 
         return (
-            <div>
-                          
+            <div>             
                 <ul className="diglist"  >
                     {dogList}
                 </ul>
