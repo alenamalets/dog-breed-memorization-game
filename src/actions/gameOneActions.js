@@ -78,7 +78,7 @@ export function handleClick(event){
   return function(dispatch, getState){
     const gameOneState = getState().gameOneReducer;
     if(givenAnswer === gameOneState.correctAnswer){
-      if(gameOneState.questionCount > 9){
+      if(gameOneState.questionCount > 4){
         dispatch({
           type: GAME_ONE_DATA,
           payload: {
@@ -101,7 +101,7 @@ export function handleClick(event){
       dispatch(setupQuestionGameOne());
     }
     else {
-      if(gameOneState.questionCount > 9){
+      if(gameOneState.questionCount > 4){
         dispatch({
           type: GAME_ONE_DATA,
           payload: {
