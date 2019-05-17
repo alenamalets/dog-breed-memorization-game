@@ -52,31 +52,31 @@ class GameTwo extends Component {
         {
           this.props.images.length === 0 ?
           <p>loading...</p> : 
-          <div>                
+          <p>                
             <b>{this.props.correctAnswer.toUpperCase()} </b>
-            <p>Question: {this.props.questionCount} /10</p>
+            <div>Question: {this.props.questionCount} /10</div>
             <br/>
             {
             this.props.images.map((url,index) =>
               <img className= {`game2-pic ${(this.props.answers[index]===this.props.correctAnswer)?this.props.greenColor:this.props.redColor}`}
               data-url={this.props.answers[index]}  onClick={this.handleChange}  key={index} src={url}/>
             )}
-          </div>
-        } 
 
-        <div>{this.props.correctCount*10}%</div>
-        <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
-          <div id="myBar" style={{ width: this.props.correctCount * 10 + '%'}}></div>
-        </div>
-        <br></br>
-        <button onClick={this.props.restartGame}>START NEW GAME</button>
-        
+            <div>{this.props.correctCount*10}%</div>
+            <div id="myProgress" style={{width: '30%', margin: '0 auto'}}>
+                <div id="myBar" style={{ width: this.props.correctCount * 10 + '%'}}></div>
+            </div>
+            <br></br>
+            <button onClick={this.props.restartGame}>START NEW GAME</button>
+          </p>
+        }     
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
+  
   return {
     ...state.gameTwoReducer
   }
