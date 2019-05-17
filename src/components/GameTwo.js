@@ -37,13 +37,15 @@ class GameTwo extends Component {
     else {
       if(event.target.value === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
-        alert('game has finished')
+        setTimeout(() => {
+          alert('GAME HAS FINISHED')
+        }, 1000)
       } 
       else {
         this.props.changeColor(true);
         setTimeout(()=> {
           this.props.changeColor(false);
-          alert('game has finished')
+          alert('GAME HAS FINISHED')
         }, 2000);
       }
     }
@@ -53,7 +55,8 @@ class GameTwo extends Component {
     return (
       <div>            
         { this.props.images.length === 0 ? <p>loading...</p> : 
-          <div>                
+          <div>        
+            <p><b>Сhoose the correct picture by breed name:</b></p>        
             <b>{this.props.correctAnswer.toUpperCase()} </b>
             <p>Question: {this.props.questionCount} / {amountOfQuestions}</p>
             <br/>

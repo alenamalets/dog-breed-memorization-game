@@ -40,14 +40,14 @@ class GameOne extends Component {
       if (event.target.value === this.props.correctAnswer) {
         this.props.incrementCorrectCount(this.props.correctCount);
         setTimeout(() => {
-          alert('game has finished')
+          alert('GAME HAS FINISHED')
         }, 1000)
       } 
       else {
         this.props.changeColor(true);
         setTimeout(() => {
           this.props.changeColor(false);
-          alert('game has finished')
+          alert('GAME HAS FINISHED')
         }, 2000);
       }
     }
@@ -78,6 +78,7 @@ class GameOne extends Component {
       this.props.answers.length === 0 ? <p>loading...</p> :
         <div className="progress" >
           <div>
+            <p><b>Сhoose the correct breed name</b></p>
             <p>Question: {this.props.questionCount} / {amountOfQuestions}</p>
             <img className="dog-pic" src={this.props.imageUrl} alt={this.props.correctAnswer} />
             <div>{this.props.correctCount * 20}%</div>

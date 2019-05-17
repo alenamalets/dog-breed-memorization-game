@@ -39,13 +39,13 @@ class GameThree extends Component {
       if (value === this.props.correctAnswer) {
         this.props.incrementCorrectCount(this.props.correctCount);
         setTimeout(() => {
-          alert('game has finished')
+          alert('GAME HAS FINISHED')
         }, 1000)
       } else {
         this.props.changeColor(true);
         setTimeout(() => {
           this.props.changeColor(false);
-          alert('game has finished')
+          alert('GAME HAS FINISHED')
         }, 2000);
       }
     }
@@ -56,6 +56,7 @@ class GameThree extends Component {
       <div>
         {this.props.gamePicker === 0 ?
           <div>
+            <p><b>Сhoose the correct breed name</b></p>
             <p>Question: {this.props.questionCount} / {amountOfQuestions}</p>
             <img className="dog-pic" style={{ width: '30%', margin: '0 auto' }} src={this.props.imageUrl} alt={this.props.correctAnswer} />
             <div>{this.props.correctCount * 20}%</div>
@@ -76,6 +77,7 @@ class GameThree extends Component {
           </div>
           :
           <div>
+            <p><b>Сhoose the correct picture by breed name:</b></p>
             <b>{this.props.correctAnswer.toUpperCase()} </b>
             <p>Question: {this.props.questionCount} / {amountOfQuestions}</p>
             <br></br>
