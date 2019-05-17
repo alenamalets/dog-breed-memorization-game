@@ -70,15 +70,15 @@ class GameOne extends Component {
             this.props.handleClick({ target: { value: this.props.answers[2] }})
           }}
         />
-        
-        <div>
-          <p>Question: {this.props.questionCount} /10</p>
+       
+          <p>Question: {this.props.questionCount} / {amountOfQuestions}</p>
 
           <img className="dog-pic" src={this.props.imageUrl} alt={this.props.correctAnswer} />
-          <div>{this.props.correctCount * 10}%</div>
+          <div>{this.props.correctCount * 20}%</div>
           <div id="myProgress" style={{ width: '30%', margin: '0 auto' }}>
-            <div id="myBar" style={{ width: this.props.correctCount * 10 + '%' }}></div>
+            <div id="myBar" style={{ width: this.props.correctCount * 20 + '%' }}></div>
           </div>
+          {this.displayAnswers()}
         </div>
     )
   }
