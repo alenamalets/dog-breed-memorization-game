@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
-
-import {
-  startGameThree, incrementCorrectCount, incrementQuestionCount, changeColor
-} from '../actions/gameThreeActions'
 import { connect } from 'react-redux';
+import {
+  setupQuestionGameThree, 
+  incrementCorrectCount, 
+  incrementQuestionCount, 
+  changeColor,
+  restartGame
+} from '../actions/gameThreeActions'
 import './GameThree.css'
 
 const amountOfQuestions = 10;
- class GameThree extends Component {
+class GameThree extends Component {
 
   componentDidMount(){
-    this.props.startGameThree();
+    this.props.setupQuestionGameThree();
   }
 
  
@@ -21,11 +24,11 @@ const amountOfQuestions = 10;
       if(value === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
         this.props.incrementQuestionCount(this.props.questionCount);
-        this.props.startGameThree();
+        this.props.setupQuestionGameThree();
       } else {
         this.props.changeColor(true);
         setTimeout(()=> {
-          this.props.startGameThree();
+          this.props.setupQuestionGameThree();
           this.props.changeColor(false);
           this.props.incrementQuestionCount(this.props.questionCount);
         }, 2000);
@@ -45,9 +48,7 @@ const amountOfQuestions = 10;
       }
     }
   }
-  newgame = () => {
-    window.location.reload();
-  }
+  
   render() {
 
     return (
@@ -106,7 +107,7 @@ const amountOfQuestions = 10;
           </div>
 
 }         <br></br>
-          <button onClick={this.newgame}>START NEW GAME</button>
+          <button onClick={this.props.restartGame}>START NEW GAME</button>
 
    
       </div>
@@ -116,10 +117,14 @@ const amountOfQuestions = 10;
 
 const mapStateToProps = (state) => {
   return {
-  ...state.game3reducer
+    ...state.gameThreeReducer
   }
 }
 
 export default connect(mapStateToProps, { 
-  startGameThree, incrementCorrectCount, incrementQuestionCount,changeColor
+  setupQuestionGameThree, 
+  incrementCorrectCount, 
+  incrementQuestionCount,
+  changeColor,
+  restartGame
 })(GameThree);

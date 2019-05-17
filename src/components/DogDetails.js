@@ -22,7 +22,9 @@ class DogDetails extends Component{
 }
 
 const mapStateToProps=(state) =>{
-  return {Images:state.dogImages}
+  return {
+    Images: state.dogImages
+  }
 }
   
 export default connect(mapStateToProps,{ getImages })(DogDetails)

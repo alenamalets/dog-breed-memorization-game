@@ -2,7 +2,8 @@ import {
     GAME_ONE_DATA, 
     INCREMENT_CORRECT_COUNT_ONE, 
     INCREMENT_QUESTION_COUNT_ONE, 
-    CHANGE_COLOR_ONE
+    CHANGE_COLOR_ONE,
+    RESTART_GAME_ONE
 } from '../actions/gameOneActions';
 
 const initialState = {
@@ -22,10 +23,12 @@ const reducer = (state = initialState, action = {}) => {
         case INCREMENT_QUESTION_COUNT_ONE:
             return {...state, ...action.payload};
         case CHANGE_COLOR_ONE:
-            return {...state, ...action.payload};    
+            return {...state, ...action.payload};   
+        case RESTART_GAME_ONE: 
+            return initialState;
         default:
-            return state
+            return state;
     }
 }
 
-export default reducer
+export default reducer;

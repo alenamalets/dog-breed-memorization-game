@@ -1,26 +1,22 @@
 import * as request from 'superagent';
-import {answersNoRepeat} from './gameOneActions'
-import {shuffleAnswers} from './gameOneActions'
+import {
+  getCorrectAnswerFromDogList,
+  addWrongAnswersWithoutRepeat,
+  shuffleAnswers,
+  getRandomImageFromImageList
+} from './functionsForAllGames';
+
 export const GAME_TWO_DATA = 'GAME_TWO_DATA';
 export const INCREMENT_CORRECT_COUNT_TWO = 'INCREMENT_CORRECT_COUNT_TWO';
 export const INCREMENT_QUESTION_COUNT_TWO = 'INCREMENT_QUESTION_COUNT_TWO'; 
 export const CHANGE_COLOR_TWO = 'CHANGE_COLOR_TWO';  
+export const RESTART_GAME_TWO = 'RESTART_GAME_TWO';
 
-function getCorrectName (dogList){
-    const correctName = dogList[Math.floor(Math.random()*dogList.length)];
-    return correctName
-}
-
-const pickRandomImgUrl = (images) => {
-  const randomNumber = Math.floor(Math.random() * images.length);
-  return images[randomNumber];
-}
-
-export function getRandomImage(){
+export function setupQuestionGameTwo(){
   return function (dispatch, getState){  
     const dogsList = getState().dogsList;
-    const correctAnswer = getCorrectName(dogsList);
-    const allAnswers = answersNoRepeat(dogsList, correctAnswer);
+    const correctAnswer = getCorrectAnswerFromDogList(dogsList);
+    const allAnswers = addWrongAnswersWithoutRepeat(dogsList, correctAnswer);
     const shuffledAnswers = shuffleAnswers(allAnswers);
 
     const allRequests = shuffledAnswers.map(answer => {
@@ -31,18 +27,17 @@ export function getRandomImage(){
       .all(allRequests)
       .then(responses => {
         const allImages = responses.map(response => {
-          return pickRandomImgUrl(response.body.message);
+          return getRandomImageFromImageList(response.body.message);
         });
-        dispatch(setupQuestion(dogsList, correctAnswer, shuffledAnswers, allImages));
+        dispatch(sendGameTwoDataToState(correctAnswer, shuffledAnswers, allImages));
       })
   }
 }
 
-export function setupQuestion(dogsList, correctAnswer, shuffledAnswers, allImages){
+function sendGameTwoDataToState(correctAnswer, shuffledAnswers, allImages){
   return {
     type: GAME_TWO_DATA,
     payload: {
-      dogs: [...dogsList],
       correctAnswer: correctAnswer,
       answers: shuffledAnswers,
       images: allImages
@@ -84,5 +79,14 @@ export function changeColor(isInAnswerMode){
       redColor:redcolor,
       greenColor:greencolor   
     }
+  }
+}
+
+export function restartGame(){
+  return function (dispatch){
+    dispatch({
+      type: RESTART_GAME_TWO
+    })
+    dispatch(setupQuestionGameTwo());
   }
 }
