@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {
-  startGameOne, 
+  setupQuestionGameOne, 
   incrementCorrectCount, 
   incrementQuestionCount, 
   changeColor,
@@ -12,7 +12,7 @@ import './GameOne.css'
 const amountOfQuestions = 10;
 class GameOne extends Component {
   componentDidMount() {
-    this.props.startGameOne();
+    this.props.setupQuestionGameOne();
     console.log(this.props.isInAnswerMode);
   }
 
@@ -21,14 +21,14 @@ class GameOne extends Component {
       if (event.target.value === this.props.correctAnswer) {
         this.props.incrementCorrectCount(this.props.correctCount);
         this.props.incrementQuestionCount(this.props.questionCount);
-        this.props.startGameOne();
+        this.props.setupQuestionGameOne();
       } else {
 
 
         this.props.changeColor(true);
 
         setTimeout(() => {
-          this.props.startGameOne();
+          this.props.setupQuestionGameOne();
           this.props.changeColor(false);
           this.props.incrementQuestionCount(this.props.questionCount);
 
@@ -97,12 +97,12 @@ class GameOne extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.randomImage
+    ...state.gameOneReducer
   }
 }
 
 export default connect(mapStateToProps, {
-  startGameOne, 
+  setupQuestionGameOne, 
   incrementCorrectCount, 
   incrementQuestionCount, 
   changeColor, 

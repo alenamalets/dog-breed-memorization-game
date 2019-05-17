@@ -11,7 +11,7 @@ export const INCREMENT_QUESTION_COUNT_ONE = 'INCREMENT_QUESTION_COUNT_ONE';
 export const CHANGE_COLOR_ONE = "CHANGE_COLOR_ONE";
 export const RESTART_GAME_ONE = "RESTART_GAME_ONE";  
 
-export function startGameOne(){
+export function setupQuestionGameOne(){
   return function (dispatch, getState){  
     request('https://dog.ceo/api/breeds/image/random')
       .then(response => {
@@ -76,6 +76,6 @@ export function restartGame(){
     dispatch({
       type: RESTART_GAME_ONE
     })
-    dispatch(startGameOne());
+    dispatch(setupQuestionGameOne());
   }
 }

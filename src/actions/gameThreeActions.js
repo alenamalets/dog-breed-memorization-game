@@ -13,7 +13,7 @@ export const INCREMENT_QUESTION_COUNT_THREE = 'INCREMENT_QUESTION_COUNT_THREE';
 export const CHANGE_COLOR_THREE = 'CHANGE_COLOR_THREE'; 
 export const RESTART_GAME_THREE = 'RESTART_GAME_THREE';
 
-export function startGameThree(){
+export function setupQuestionGameThree(){
  const gamePicker = Math.floor(Math.random()*2);
   if(gamePicker === 0){
     return function (dispatch, getState){  
@@ -121,7 +121,7 @@ export function restartGame(){
     dispatch({
       type: RESTART_GAME_THREE
     })
-    dispatch(startGameThree());
+    dispatch(setupQuestionGameThree());
   }
 }
 

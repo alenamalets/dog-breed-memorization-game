@@ -12,7 +12,7 @@ export const INCREMENT_QUESTION_COUNT_TWO = 'INCREMENT_QUESTION_COUNT_TWO';
 export const CHANGE_COLOR_TWO = 'CHANGE_COLOR_TWO';  
 export const RESTART_GAME_TWO = 'RESTART_GAME_TWO';
 
-export function startGameTwo(){
+export function setupQuestionGameTwo(){
   return function (dispatch, getState){  
     const dogsList = getState().dogsList;
     const correctAnswer = getCorrectAnswerFromDogList(dogsList);
@@ -87,6 +87,6 @@ export function restartGame(){
     dispatch({
       type: RESTART_GAME_TWO
     })
-    dispatch(startGameTwo());
+    dispatch(setupQuestionGameTwo());
   }
 }

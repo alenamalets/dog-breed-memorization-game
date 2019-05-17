@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {
-  startGameTwo, 
+  setupQuestionGameTwo, 
   incrementCorrectCount, 
   incrementQuestionCount, 
   changeColor,
@@ -12,7 +12,7 @@ import "./GameTwo.css"
 const amountOfQuestions = 10;
 class GameTwo extends Component {
   componentDidMount(){
-    this.props.startGameTwo();
+    this.props.setupQuestionGameTwo();
   }
 
   handleChange = (event) => {
@@ -21,12 +21,12 @@ class GameTwo extends Component {
       if(event.target.getAttribute('data-url') === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
         this.props.incrementQuestionCount(this.props.questionCount);
-        this.props.startGameTwo();
+        this.props.setupQuestionGameTwo();
 
       } else {
         this.props.changeColor(true);
         setTimeout(()=> {
-          this.props.startGameTwo();
+          this.props.setupQuestionGameTwo();
           this.props.changeColor(false);
           this.props.incrementQuestionCount(this.props.questionCount);
         }, 2000);
@@ -78,12 +78,12 @@ class GameTwo extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.game2reducer
+    ...state.gameTwoReducer
   }
 }
 
 export default connect(mapStateToProps, {
-  startGameTwo, 
+  setupQuestionGameTwo, 
   incrementCorrectCount, 
   incrementQuestionCount, 
   changeColor,

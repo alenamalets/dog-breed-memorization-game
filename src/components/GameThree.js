@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {
-  startGameThree, 
+  setupQuestionGameThree, 
   incrementCorrectCount, 
   incrementQuestionCount, 
   changeColor,
@@ -13,7 +13,7 @@ const amountOfQuestions = 10;
 class GameThree extends Component {
 
   componentDidMount(){
-    this.props.startGameThree();
+    this.props.setupQuestionGameThree();
   }
 
  
@@ -24,11 +24,11 @@ class GameThree extends Component {
       if(value === this.props.correctAnswer){
         this.props.incrementCorrectCount(this.props.correctCount);
         this.props.incrementQuestionCount(this.props.questionCount);
-        this.props.startGameThree();
+        this.props.setupQuestionGameThree();
       } else {
         this.props.changeColor(true);
         setTimeout(()=> {
-          this.props.startGameThree();
+          this.props.setupQuestionGameThree();
           this.props.changeColor(false);
           this.props.incrementQuestionCount(this.props.questionCount);
         }, 2000);
@@ -117,12 +117,12 @@ class GameThree extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.game3reducer
+    ...state.gameThreeReducer
   }
 }
 
 export default connect(mapStateToProps, { 
-  startGameThree, 
+  setupQuestionGameThree, 
   incrementCorrectCount, 
   incrementQuestionCount,
   changeColor,
