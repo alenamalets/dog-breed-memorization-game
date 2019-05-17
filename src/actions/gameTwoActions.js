@@ -28,7 +28,11 @@ export function setupQuestionGameTwo(){
       .then(responses => {
         const allImages = responses.map(response => {
           return getRandomImageFromImageList(response.body.message);
-        });
+        })
+        .catch(errors =>
+             console.log("errors")        
+        )
+        ;
         dispatch(sendGameTwoDataToState(correctAnswer, shuffledAnswers, allImages));
       })
   }
