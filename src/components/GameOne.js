@@ -59,7 +59,6 @@ class GameOne extends Component {
           return (
 
             <div className="radio" key={index} >
-
               <label key={answer} className={(answer === this.props.correctAnswer) ? this.props.greenColor : this.props.redColor}>
                 {answer}
                 <input type="radio" value={answer} id={answer} name="answer"
@@ -78,11 +77,8 @@ class GameOne extends Component {
     return (
       this.props.answers.length === 0 ? <p>loading...</p> :
       <div className="progress" >
-
-
         <div>
           <p>Question: {this.props.questionCount} /10</p>
-
           <img className="dog-pic" src={this.props.imageUrl} alt={this.props.correctAnswer} />
           <div>{this.props.correctCount * 10}%</div>
           <div id="myProgress" style={{ width: '30%', margin: '0 auto' }}>
