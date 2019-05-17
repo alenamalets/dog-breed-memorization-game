@@ -5,65 +5,30 @@ import {
   incrementCorrectCount, 
   incrementQuestionCount, 
   changeColor,
-  restartGame
+  restartGame,
+  handleClick,
+  handleKeyPress
 } from '../actions/gameOneActions'
 import './GameOne.css'
+import KeyHandler, { KEYPRESS } from 'react-key-handler';
 
-const amountOfQuestions = 10;
 class GameOne extends Component {
   componentDidMount() {
     this.props.setupQuestionGameOne();
-    console.log(this.props.isInAnswerMode);
-  }
-
-  handleChange = (event) => {
-    if (this.props.questionCount < amountOfQuestions) {
-      if (event.target.value === this.props.correctAnswer) {
-        this.props.incrementCorrectCount(this.props.correctCount);
-        this.props.incrementQuestionCount(this.props.questionCount);
-        this.props.setupQuestionGameOne();
-      } else {
-
-
-        this.props.changeColor(true);
-
-        setTimeout(() => {
-          this.props.setupQuestionGameOne();
-          this.props.changeColor(false);
-          this.props.incrementQuestionCount(this.props.questionCount);
-
-        }, 2000);
-      }
-    } else {
-      if (event.target.value === this.props.correctAnswer) {
-        this.props.incrementCorrectCount(this.props.correctCount);
-        setTimeout(() => {
-          alert('game has finished')
-        }, 1000)
-      } else {
-        this.props.changeColor(true);
-        setTimeout(() => {
-          this.props.changeColor(false);
-          alert('game has finished')
-        }, 2000);
-
-      }
-    }
   }
 
   displayAnswers = () => {
-
     return (
       <div>
         {this.props.answers.map((answer, index) => {
           return (
-
             <div className="radio" key={index} >
-
-              <label key={answer} className={(answer === this.props.correctAnswer) ? this.props.greenColor : this.props.redColor}>
+                <label key={answer} className={
+                  this.props.givenAnswer ? answer === this.props.correctAnswer ? 'green' : 'red' : ''
+                }>
                 {answer}
                 <input type="radio" value={answer} id={answer} name="answer"
-                  onChange={this.handleChange} />
+                  onChange={this.props.handleClick} checked={this.props.simulateClick[index]} />
               </label>
             </div>
           );
@@ -77,9 +42,32 @@ class GameOne extends Component {
   render() {
     return (
       this.props.answers.length === 0 ? <p>loading...</p> :
-      <div className="progress" >
-
-
+      <div className="progress">
+        <KeyHandler
+          keyEventName={KEYPRESS}
+          keyValue="1"
+          onKeyHandle={event => {
+            this.props.handleKeyPress(event)
+            this.props.handleClick({ target: { value: this.props.answers[0] }})
+          }}
+        />
+        <KeyHandler
+          keyEventName={KEYPRESS}
+          keyValue="2"
+          onKeyHandle={event => {
+            this.props.handleKeyPress(event)
+            this.props.handleClick({ target: { value: this.props.answers[1] }})
+          }}
+        />
+        <KeyHandler
+          keyEventName={KEYPRESS}
+          keyValue="3"
+          onKeyHandle={event => {
+            this.props.handleKeyPress(event)
+            this.props.handleClick({ target: { value: this.props.answers[2] }})
+          }}
+        />
+        
         <div>
           <p>Question: {this.props.questionCount} /10</p>
 
@@ -106,5 +94,7 @@ export default connect(mapStateToProps, {
   incrementCorrectCount, 
   incrementQuestionCount, 
   changeColor, 
-  restartGame
+  restartGame,
+  handleClick,
+  handleKeyPress
 })(GameOne);
