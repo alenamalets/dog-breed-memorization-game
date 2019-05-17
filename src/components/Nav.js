@@ -7,7 +7,7 @@ export default class Nav extends Component{
     render(){      
         return (
             <div>
-               <div id="logo" > <img src={logo}/> </div>
+               <div id="logo" > <img src={logo} alt='logo'/> </div>
                <h1>WHAT THE DOG?</h1> 
                 <p className="nav" > 
                     <span><Link to="/">game 1</Link></span>  
