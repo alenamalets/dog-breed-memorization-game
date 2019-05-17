@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {
-  setupQuestionGameOne, 
-  incrementCorrectCount, 
-  incrementQuestionCount, 
+  setupQuestionGameOne,
+  incrementCorrectCount,
+  incrementQuestionCount,
   changeColor,
   restartGame,
   handleClick,
@@ -12,7 +12,10 @@ import {
 import './GameOne.css'
 import KeyHandler, { KEYPRESS } from 'react-key-handler';
 
+const amountOfQuestions = 5;
+
 class GameOne extends Component {
+
   componentDidMount() {
     this.props.setupQuestionGameOne();
   }
@@ -76,9 +79,7 @@ class GameOne extends Component {
           <div id="myProgress" style={{ width: '30%', margin: '0 auto' }}>
             <div id="myBar" style={{ width: this.props.correctCount * 10 + '%' }}></div>
           </div>
-          {this.displayAnswers()}
         </div>
-      </div>
     )
   }
 }

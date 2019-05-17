@@ -22,6 +22,11 @@ export function setupQuestionGameThree(){
           const dogsList = getState().dogsList;
           dispatch(sendGameOneDataToState(dogsList, response.body.message, gamePicker));  
         })
+        .catch(error =>
+          console.log("errors",error.message)
+        // errors.map(error =>{ return   console.log("strat error",error.message,"finish")} ) 
+       
+        )
     }
   }
   else{
@@ -43,6 +48,9 @@ export function setupQuestionGameThree(){
           });
           dispatch(sendGameTwoDataToState(correctAnswer, shuffledAnswers, allImages, gamePicker));
         })
+        .catch(errors =>
+          console.log("errors",errors)         
+        )
     }
   }
 }
