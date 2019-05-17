@@ -14,7 +14,7 @@ export const CHANGE_COLOR_THREE = 'CHANGE_COLOR_THREE';
 export const RESTART_GAME_THREE = 'RESTART_GAME_THREE';
 
 export function setupQuestionGameThree(){
- const gamePicker = Math.floor(Math.random()*2);
+  const gamePicker = Math.floor(Math.random()*2);
   if(gamePicker === 0){
     return function (dispatch, getState){  
       request('https://dog.ceo/api/breeds/image/random')
