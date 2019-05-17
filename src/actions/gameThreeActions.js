@@ -45,14 +45,12 @@ export function setupQuestionGameThree(){
         .then(responses => {
           const allImages = responses.map(response => {
             return getRandomImageFromImageList(response.body.message);
-          })
-          .catch(errors =>
-            console.log("errors",errors)         
-         
-          )
-          ;
+          });
           dispatch(sendGameTwoDataToState(correctAnswer, shuffledAnswers, allImages, gamePicker));
         })
+        .catch(errors =>
+          console.log("errors",errors)         
+        )
     }
   }
 }
