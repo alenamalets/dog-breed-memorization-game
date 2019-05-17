@@ -77,12 +77,17 @@ export function handleClick(event){
 
   return function(dispatch, getState){
     const gameOneState = getState().gameOneReducer;
+    if(gameOneState.gameIsFinished){
+      return false;
+    }
+
     if(givenAnswer === gameOneState.correctAnswer){
       if(gameOneState.questionCount > 4){
         dispatch({
           type: GAME_ONE_DATA,
           payload: {
             correctCount: gameOneState.correctCount + 1,
+            gameIsFinished: true
           }
         })
         alert('game has finished')
@@ -95,7 +100,7 @@ export function handleClick(event){
           correctCount: gameOneState.correctCount + 1,
           questionCount: gameOneState.questionCount + 1,
           givenAnswer: '',
-          simulateClick: []
+          simulateClick: [],
         }
       })
       dispatch(setupQuestionGameOne());
@@ -108,7 +113,15 @@ export function handleClick(event){
             givenAnswer: givenAnswer
           }
         })
-        alert('game has finished')
+        setTimeout(() => {
+          dispatch({
+            type: GAME_ONE_DATA,
+            payload: {
+              gameIsFinished: true
+            }
+          })
+          alert('game has finished')
+        }, 2000);
         return false;
       }
 
@@ -124,7 +137,7 @@ export function handleClick(event){
           payload: {
             questionCount: gameOneState.questionCount + 1,
             givenAnswer: '',
-            simulateClick: []
+            simulateClick: [],
           }
         })
         dispatch(setupQuestionGameOne());
